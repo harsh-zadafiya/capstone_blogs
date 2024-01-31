@@ -6,6 +6,10 @@
   height: 40vmin;
   pointer-events: none;
 }
+/* sudheer changes  */
+.App-logo {
+  color: red;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -36,6 +40,6 @@
     transform: rotate(360deg);
   }
 }
-.class{
+.class {
   font-size: 12px;
 }
