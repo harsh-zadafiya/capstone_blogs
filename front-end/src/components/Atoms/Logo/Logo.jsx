@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const Logo = () => <LogoLink>APP NAME</LogoLink>;
+const Logo = () => <LogoLink>C4U</LogoLink>;
 
 const LogoLink = styled("div")`
-    color: white;
+  color: white;
 `;
 
 export default Logo;
