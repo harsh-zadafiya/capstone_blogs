@@ -1,27 +1,26 @@
 import styled from "styled-components";
-import { LoginForm } from "../../components";
+import { SignUpForm } from "../../components";
 import { FormPageWrapper, FormWrapperContainer } from "../../style/Form";
-import { Link, useNavigate } from "react-router-dom";
 import path from "../../constants/path";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const LoginPage = () => {
+const SignUpPage = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.user.userInfo);
 
     useEffect(() => {
-        console.log(Object.keys(user));
         Object.values(user).length !== 0 && navigate(path.APP);
     }, [user]);
 
     return (
         <FormPageWrapper>
             <FormWrapperContainer>
-                <FormTitle>Login Form</FormTitle>
-                <LoginForm />
+                <FormTitle>Let's Create A New Account</FormTitle>
+                <SignUpForm />
                 <FooterLink>
-                    Don't have an account? <SecondaryLink to={path.SIGN_UP}>Create Now</SecondaryLink>
+                    Already have an Account? <SecondaryLink to={path.LOGIN}>Login Now</SecondaryLink>
                 </FooterLink>
             </FormWrapperContainer>
         </FormPageWrapper>
@@ -47,4 +46,4 @@ const SecondaryLink = styled(Link)`
     }
 `;
 
-export default LoginPage;
+export default SignUpPage;
