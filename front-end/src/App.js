@@ -2,11 +2,12 @@ import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import path from "./constants/path";
 import { Navigation } from "./components/index";
-import { SignUpPage, LoginPage, MyAccountsPage, HomePage } from "./pages";
+import { SignUpPage, LoginPage, MyAccountsPage, HomePage, AddNewBlog } from "./pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "./utils/axios";
 import { updateUser } from "./redux/user/user.reducer";
+import UserFeedbackForm from "./pages/UserFeedbackForm/UserFeebackForm";
 
 function App() {
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ function App() {
           />
           <Route path={path.APP} exact element={<MyAccountsPage />} />
           <Route path={path.HOME} exact element={<HomePage />} />
+          <Route path={path.ADD_NEW_BLOG} exact element={<AddNewBlog />} />
+          {/* <Route path={path.USER_FEEDBACK} exact element={<UserFeedbackForm />} /> */}
         </Routes>
       </div>
     </div>
