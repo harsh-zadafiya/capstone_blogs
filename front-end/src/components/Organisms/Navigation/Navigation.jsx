@@ -23,6 +23,16 @@ const Navigation = () => {
                 <NavigationLinks>
                     {Object.keys(user).length !== 0 ? (
                         <>
+                            <Link to={path.HOME}>
+                                <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
+                                    Home
+                                </Button>
+                            </Link>
+                            <Link to={path.LOGIN}>
+                                <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
+                                    Login
+                                </Button>
+                            </Link>
                             <RedButton
                                 onClick={async () => {
                                     await axios.get("/user/logout");
@@ -32,6 +42,7 @@ const Navigation = () => {
                             >
                                 Logout
                             </RedButton>
+
                         </>
                     ) : (
                         <Buttons>

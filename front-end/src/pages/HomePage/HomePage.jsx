@@ -1,12 +1,10 @@
 import React from 'react';
-import { Navigation } from './Navigation';
 import { VideoFrame } from '../../components';
 import { ContentWrapper, PageWrapper, SectionWrapper} from '../../style/Wrapper';
 
 const HomePage = () => {
   return (
     <PageWrapper>
-        <Navigation />
           <SectionWrapper>
             <ContentWrapper>
               <div className="intro">

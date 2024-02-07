@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import path from "./constants/path";
 import { Navigation } from "./components/index";
-import { SignUpPage, LoginPage, MyAccountsPage } from "./pages";
+import { SignUpPage, LoginPage, MyAccountsPage, HomePage } from "./pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "./utils/axios";
@@ -37,6 +37,7 @@ function App() {
             element={<SignUpPage user={user} />}
           />
           <Route path={path.APP} exact element={<MyAccountsPage />} />
+          <Route path={path.HOME} exact element={<HomePage />} />
         </Routes>
       </div>
     </div>
