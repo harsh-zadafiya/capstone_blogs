@@ -46,10 +46,7 @@ function App() {
           <Route path={path.APP} exact element={<MyAccountsPage />} />
           <Route path={path.HOME} exact element={<HomePage />} />
           <Route path={path.ADD_NEW_BLOG} exact element={<AddNewBlog />} />
-          <Route
-            path={path.USER_FEEDBACK}
-            exact
-            element={<UserFeedbackForm />}
+          <Route path={path.USER_FEEDBACK} exact element={<UserFeedbackForm />}
           />
         </Routes>
       </div>

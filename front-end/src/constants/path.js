@@ -4,7 +4,7 @@ const path = {
     APP: "/app",
     HOME: "/home",
     ADD_NEW_BLOG: "/addnewblog",
-    // USER_FEEDBACK: "/userfeedback",
+    USER_FEEDBACK: "/userfeedback",
 };
 
 export default path;
