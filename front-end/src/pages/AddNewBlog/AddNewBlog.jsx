@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { LoginForm } from "../../components";
+import {InputField} from "../../components";
 import { FormPageWrapper, FormWrapperContainer } from "../../style/Form";
 import {useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import InputField from "../../components";
  
 const AddNewBlog = () => {
     const navigate = useNavigate();
@@ -18,7 +17,6 @@ const AddNewBlog = () => {
         <FormPageWrapper>
             <FormWrapperContainer>
                 <FormTitle>Add New Blog </FormTitle>
-                <LoginForm />
                 <InputField
                     label="Title"
                     type="text"
