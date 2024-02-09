@@ -21,18 +21,34 @@ const UserFeedbackForm = () => {
           type="text"
           name="title"
           id="title"
-          onChange={onChange}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           required
         />
         <InputField
           label="Description"
-          type="=textarea"
-          t
+          type="textarea"
           name="description"
           id="description"
-          onChange={onChange}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           required
         />
+        <SelectField
+          label="Select Topic"
+          name="topic"
+          id="topic"
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+        >
+          <option value="Select all">Select all</option>
+          <option value="food">Food</option>
+          <option value="sports">Sports</option>
+          <option value="travel">Travel</option>
+          <option value="fashion">Fashion</option>
+          <option value="health">Health</option>
+        </SelectField>
+        <SubmitButton type="submit" value="Submit" />
       </FormWrapperContainer>
     </FormPageWrapper>
   );
