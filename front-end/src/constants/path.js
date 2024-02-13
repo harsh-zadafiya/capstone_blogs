@@ -5,6 +5,7 @@ const path = {
     HOME: "/home",
     ADD_NEW_BLOG: "/addnewblog",
     USER_FEEDBACK: "/userfeedback",
+    MODIFY_USER_PROFILE: "/modifyprofile"
 };
 
 export default path;

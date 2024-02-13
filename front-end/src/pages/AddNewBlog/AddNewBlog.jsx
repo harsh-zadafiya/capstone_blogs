@@ -1,44 +1,68 @@
-import styled from "styled-components";
-import { InputField } from "../../components";
-import { FormPageWrapper, FormWrapperContainer } from "../../style/Form";
+import React, { useState } from "react";
+import { InputField, Button } from "../../components";
+// import { ButtonWrapper } from "../../../style/Form";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { FormPageWrapper, FormWrapperContainer, ButtonWrapper } from "../../style/Form";
+import styled from "styled-components";
 
 const AddNewBlog = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    topic: "Select all",
+    image: null,
+  });
 
-  const onChange = () => {};
+  const { title, description, topic, image } = formData;
+
+  const onChange = (e) => {
+    if (e.target.name === "image") {
+      // Handling file input
+      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here
+  };
+
+  const FormTitle = styled.h2`
+    font-size: 2.4rem;
+`;
 
   return (
     <FormPageWrapper>
-      <FormWrapperContainer>
-        <FormTitle>Add New Blog </FormTitle>
+      <FormWrapperContainer onSubmit={handleSubmit}>
+        <FormTitle>Add New Blog</FormTitle>
         <InputField
-          label="Title"
+          label="Blog Name"
           type="text"
           name="title"
           id="title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={onChange}
           required
         />
-        <InputField
-          label="Description"
-          type="textarea"
+        {/* <TextareaField
+          label="Blog Content"
           name="description"
           id="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={onChange}
           required
-        />
-        <SelectField
+        /> */}
+        {/* <SelectField
           label="Select Topic"
           name="topic"
           id="topic"
           value={topic}
-          onChange={(e) => setTopic(e.target.value)}
+          onChange={onChange}
+          required
         >
           <option value="Select all">Select all</option>
           <option value="food">Food</option>
@@ -46,15 +70,23 @@ const AddNewBlog = () => {
           <option value="travel">Travel</option>
           <option value="fashion">Fashion</option>
           <option value="health">Health</option>
-        </SelectField>
-        <SubmitButton type="submit" value="Submit" />
+        </SelectField> */}
+        {/* <ImageUpload
+          type="file"
+          name="image"
+          id="image"
+          onChange={onChange}
+          required
+        /> */}
+        <ButtonWrapper>
+          <Button full type="submit">
+            Add Blog
+          </Button>
+        </ButtonWrapper>
       </FormWrapperContainer>
     </FormPageWrapper>
   );
 };
 
-const FormTitle = styled.h2`
-  font-size: 2.4rem;
-`;
 
 export default AddNewBlog;

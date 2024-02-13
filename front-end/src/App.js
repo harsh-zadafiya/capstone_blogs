@@ -8,6 +8,7 @@ import {
   MyAccountsPage,
   HomePage,
   AddNewBlog,
+  ModifyUserProfile,
 } from "./pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -46,6 +47,7 @@ function App() {
           <Route path={path.APP} exact element={<MyAccountsPage />} />
           <Route path={path.HOME} exact element={<HomePage />} />
           <Route path={path.ADD_NEW_BLOG} exact element={<AddNewBlog />} />
+          <Route path={path.MODIFY_USER_PROFILE} exact element={<ModifyUserProfile />} />
           <Route path={path.USER_FEEDBACK} exact element={<UserFeedbackForm />}
           />
         </Routes>
