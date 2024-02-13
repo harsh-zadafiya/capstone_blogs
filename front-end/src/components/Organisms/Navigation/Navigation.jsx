@@ -33,6 +33,21 @@ const Navigation = () => {
                                     Login
                                 </Button>
                             </Link>
+                            <Link to={path.ADD_NEW_BLOG}>
+                                <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
+                                    Add Blog
+                                </Button>
+                            </Link>
+                            <Link to={path.MODIFY_USER_PROFILE}>
+                                <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
+                                    Modify User
+                                </Button>
+                            </Link>
+                            <Link to={path.USER_FEEDBACK}>
+                                <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
+                                    User Feedback
+                                </Button>
+                            </Link>
                             <RedButton
                                 onClick={async () => {
                                     await axios.get("/user/logout");
@@ -57,6 +72,7 @@ const Navigation = () => {
                                 </Button>
                             </Link>
                         </Buttons>
+                        
                     )}
                 </NavigationLinks>
             </NavigationContainer>
