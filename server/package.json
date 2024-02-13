@@ -6,7 +6,7 @@
     "scripts": {
         "start": "nodemon index.js"
     },
-    "author": "Shivam Patel",
+    "author": "Capstone-Group1",
     "license": "ISC",
     "dependencies": {
         "aws-sdk": "^2.1349.0",
