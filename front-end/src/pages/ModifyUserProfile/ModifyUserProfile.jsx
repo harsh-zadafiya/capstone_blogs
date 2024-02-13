@@ -42,6 +42,10 @@ const ModifyUserProfile = () => {
     font-size: 2.4rem;
   `;
 
+  //  const FormTitle = styled.h2`
+  //    font-size: 2.4rem;
+  //  `;
+
   return (
     <FormPageWrapper>
       <FormWrapperContainer>
