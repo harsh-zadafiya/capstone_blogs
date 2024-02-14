@@ -28,11 +28,6 @@ const Navigation = () => {
                                     Home
                                 </Button>
                             </Link>
-                            <Link to={path.LOGIN}>
-                                <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
-                                    Login
-                                </Button>
-                            </Link>
                             <Link to={path.ADD_NEW_BLOG}>
                                 <Button animation={false} variant={button.variant.SECONDARY} size={button.size.SMALL}>
                                     Add Blog
