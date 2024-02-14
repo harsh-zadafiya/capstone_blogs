@@ -44,7 +44,7 @@ function App() {
             exact
             element={<SignUpPage user={user} />}
           />
-          <Route path={path.APP} exact element={<MyAccountsPage />} />
+          <Route path={path.APP} exact element={<HomePage />} />
           <Route path={path.HOME} exact element={<HomePage />} />
           <Route path={path.ADD_NEW_BLOG} exact element={<AddNewBlog />} />
           <Route path={path.MODIFY_USER_PROFILE} exact element={<ModifyUserProfile />} />
