@@ -12,7 +12,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         console.log(Object.keys(user));
-        Object.values(user).length !== 0 && navigate(path.APP);
+        Object.values(user).length !== 0 && navigate(path.HOME);
     }, [user]);
 
     return (

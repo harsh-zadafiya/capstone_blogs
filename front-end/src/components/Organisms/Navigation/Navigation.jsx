@@ -47,7 +47,7 @@ const Navigation = () => {
                                 onClick={async () => {
                                     await axios.get("/user/logout");
                                     dispatch(updateUser({}));
-                                    navigate(path.SIGN_UP);
+                                    navigate(path.LOGIN);
                                 }}
                             >
                                 Logout
