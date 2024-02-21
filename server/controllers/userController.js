@@ -128,6 +128,84 @@ exports.validateSession = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getprofile = (req, res, next) => {
+  const findUser = req.user;
+  res.status(200).json({
+    status: true,
+    user: findUser,
+  });
+};
+
+exports.updateprofile = (req, res, next) => {
+  const userData = req.user;
+  console.log(userData);
+  const { firstName, lastName, email, password } = req.body;
+
+  const updateUser = async () => {
+    try {
+      if (userData.email != email) {
+        const alreadyUser = await User.findOne({ email });
+        if (alreadyUser) {
+          res.status(200).json({
+            userUpdate: false,
+            message:
+              "This email address is already registered. Please try with a different email address.",
+          });
+        }
+      }
+
+      if (password == "" || password == undefined) {
+        await User.updateOne(
+          { email: userData.email },
+          { firstName, lastName, email }
+        );
+
+        const newuser = await User.findOne({ email });
+
+        const newToken = jwt.sign(
+          {
+            email: newuser.email,
+          },
+          SECRET_KEY
+        );
+        res.json({
+          status: true,
+          message:
+            "Your profile has been updated successfully without password change.",
+          newToken: newToken,
+        });
+      } else {
+        const newPassword = await bcrypt.hash(password, 10);
+        await User.updateOne(
+          { email: userData.email },
+          { firstName, lastName, email, password: newPassword }
+        );
+        const newuser = await User.findOne({ email });
+
+        const newToken = jwt.sign(
+          {
+            email: newuser.email,
+          },
+          SECRET_KEY
+        );
+        res.json({
+          status: true,
+          message: "Your profile has been updated successfully",
+          newToken: newToken,
+        });
+      }
+    } catch (error) {
+      res.status(200).json({
+        userUpdate: false,
+        message:
+          "This email address is already registered. Please try with a different email address.",
+      });
+    }
+  };
+
+  updateUser();
+};
+
 exports.logout = (req, res, next) => {
   res.clearCookie(cookie.KEY);
 
