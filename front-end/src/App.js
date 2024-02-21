@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import axios from "./utils/axios";
 import { updateUser } from "./redux/user/user.reducer";
 import UserFeedbackForm from "./pages/UserFeedbackForm/UserFeedbackForm";
+import ForgotPage from "./pages/ForgotPage/ForgotPage";
 
 function App() {
   const navigate = useNavigate();
@@ -44,11 +45,23 @@ function App() {
             exact
             element={<SignUpPage user={user} />}
           />
-          <Route path={path.APP} exact element={<HomePage />} />
+          <Route
+            path={path.FORGOT}
+            exact
+            element={<ForgotPage user={user} />}
+          />
+          <Route path={path.APP} exact element={<MyAccountsPage />} />
           <Route path={path.HOME} exact element={<HomePage />} />
           <Route path={path.ADD_NEW_BLOG} exact element={<AddNewBlog />} />
-          <Route path={path.MODIFY_USER_PROFILE} exact element={<ModifyUserProfile />} />
-          <Route path={path.USER_FEEDBACK} exact element={<UserFeedbackForm />}
+          <Route
+            path={path.MODIFY_USER_PROFILE}
+            exact
+            element={<ModifyUserProfile />}
+          />
+          <Route
+            path={path.USER_FEEDBACK}
+            exact
+            element={<UserFeedbackForm />}
           />
         </Routes>
       </div>
