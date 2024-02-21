@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -8,6 +8,8 @@ import {
 } from "../../style/Form";
 import styled from "styled-components";
 import { InputField, Button } from "../../components";
+import axios from "../../utils/axios";
+import path from "../../constants/path";
 
 const ModifyUserProfile = () => {
   const dispatch = useDispatch();
@@ -20,14 +22,44 @@ const ModifyUserProfile = () => {
     password: "",
   };
   const [formData, setFormData] = useState(initialState);
+  const [mounted, setMounted] = useState(true);
+  const [formType, setFormType] = useState("");
 
-  const [showForm, setShowForm] = useState(false);
+  const { firstName, lastName, email, password, conPassword } = formData;
 
-  const toggleForm = () => {
-    setShowForm(!showForm);
-  };
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:8003/api/v1/user/session",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        console.log("dfdsgds", res.data.user);
 
-  const { firstName, lastName, email, password } = formData;
+        if (mounted) {
+          if (res.data.status) {
+            setFormData({
+              firstName: res.data.user.firstName,
+              lastName: res.data.user.lastName,
+              email: res.data.user.email,
+            });
+          } else {
+            alert(res.data.message);
+            // dispatch(notSubmitted());
+            navigate(path.LOGIN);
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    return () => {
+      setMounted(false);
+    };
+  }, [dispatch, mounted, navigate]);
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,30 +67,64 @@ const ModifyUserProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //  form submission logic to be added in next sprint
+    if (password === conPassword) {
+      try {
+        axios({
+          method: "post",
+          url: "http://localhost:8003/api/v1/user/updateprofile",
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+          data: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+          },
+        })
+          .then((res) => {
+            if (res.data.status) {
+              localStorage.removeItem("token");
+              localStorage.setItem("token", res.data.newToken);
+              alert(res.data.message);
+              navigate(path.HOME);
+            } else if (!res.data.userUpdate) {
+              alert(res.data.message);
+            } else {
+              alert(res.data.message);
+              navigate(path.LOGIN);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("Passwords do not match. Please try again.");
+    }
   };
 
   const FormTitle = styled.h2`
     font-size: 2.4rem;
   `;
 
-  //  const FormTitle = styled.h2`
-  //    font-size: 2.4rem;
-  //  `;
-
   return (
     <FormPageWrapper>
       <FormWrapperContainer>
         <FormTitle>Modify Profile</FormTitle>
-        <h2>Do you want to modify your profile?</h2>
+        <h2>Do you want to modify Profile or upload Profile Picture?</h2>
         <ButtonWrapper>
-          <Button onClick={toggleForm}>Modify</Button>
+          <Button onClick={() => setFormType("modify")}>Modify</Button>
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button onClick={toggleForm}>No</Button>
+          <Button onClick={() => setFormType("upload")}>
+            Upload Profile Picture
+          </Button>
         </ButtonWrapper>
 
-        {showForm && (
+        {formType === "modify" && (
           <form onSubmit={handleSubmit}>
             <InputField
               label="First Name"
@@ -88,13 +154,34 @@ const ModifyUserProfile = () => {
               required
             />
             <InputField
-              label="Contact Number"
-              type="tel"
-              name="contactNumber"
-              id="contactNumber"
+              label="Password"
+              type="password"
+              name="password"
+              id="password"
+              value={password}
               onChange={onChange}
               required
             />
+            <InputField
+              label="Confirm Password"
+              type="conPassword"
+              name="conPassword"
+              id="conPassword"
+              value={conPassword}
+              onChange={onChange}
+              required
+            />
+
+            <ButtonWrapper>
+              <Button full type="submit">
+                Save Changes
+              </Button>
+            </ButtonWrapper>
+          </form>
+        )}
+
+        {formType === "upload" && (
+          <form onSubmit={handleSubmit}>
             <InputField
               label="Profile Photo"
               type="file"
@@ -103,11 +190,6 @@ const ModifyUserProfile = () => {
               onChange={onChange}
               accept="image/*"
             />
-            <ButtonWrapper>
-              <Button full type="submit">
-                Save Changes
-              </Button>
-            </ButtonWrapper>
           </form>
         )}
       </FormWrapperContainer>
