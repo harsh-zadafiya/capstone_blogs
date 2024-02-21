@@ -67,7 +67,7 @@ const LoginForm = () => {
         const { data: response } = await axios.post("/user/login", formData);
 
         dispatch(updateUser(response.user));
-        navigate(path.APP);
+        navigate(path.HOME);
       } catch (err) {
         setGlobalError(err.response.data.message);
       }
