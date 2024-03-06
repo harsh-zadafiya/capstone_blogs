@@ -408,7 +408,7 @@ const ListingDetailsPage = () => {
             <CarProperty>
               <MileageIcon />
               <PropertyWrapper>
-                <PropertyTitle>Mileage</PropertyTitle>
+                <PropertyTitle>Date</PropertyTitle>
                 <PropertyValue>{carMileage}</PropertyValue>
               </PropertyWrapper>
             </CarProperty>
@@ -423,7 +423,7 @@ const ListingDetailsPage = () => {
             <CarProperty>
               <TransmissionIcon />
               <PropertyWrapper>
-                <PropertyTitle>Transmission</PropertyTitle>
+                <PropertyTitle>Category</PropertyTitle>
                 <PropertyValue>{transmission}</PropertyValue>
               </PropertyWrapper>
             </CarProperty>
@@ -437,19 +437,19 @@ const ListingDetailsPage = () => {
           </CarProperties>
           <CarDescription>
             <DescriptionGroup>
-              <DescriptionHeading>Seller Name</DescriptionHeading>
+              <DescriptionHeading>Author Name</DescriptionHeading>
               <Text>{sellerName}</Text>
             </DescriptionGroup>
             <DescriptionGroup>
-              <DescriptionHeading>Highlight</DescriptionHeading>
+              <DescriptionHeading>Highlights</DescriptionHeading>
               <Text>{highlight}</Text>
             </DescriptionGroup>
             <DescriptionGroup>
-              <DescriptionHeading>Ownership History</DescriptionHeading>
+              <DescriptionHeading>Blog Details</DescriptionHeading>
               <Text>{ownershipHistory}</Text>
             </DescriptionGroup>
             <DescriptionGroup>
-              <DescriptionHeading>Recent Service History</DescriptionHeading>
+              <DescriptionHeading>Comments</DescriptionHeading>
               <Text>{recentServiceHistory}</Text>
             </DescriptionGroup>
             {sellerNotes ? (

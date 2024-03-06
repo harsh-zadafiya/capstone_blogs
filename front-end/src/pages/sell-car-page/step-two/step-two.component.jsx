@@ -44,7 +44,7 @@ const StepTwo = ({
   return (
     <Form onSubmit={handleSubmit} noValidate>
       <InputField
-        label=" Name"
+        label=" Author Name"
         type="text"
         id="sellerName"
         name="sellerName"
