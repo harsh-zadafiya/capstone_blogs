@@ -48,4 +48,54 @@ const ProfilePage = () => {
             alert(res.data.message);
           }
         })
-       
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      alert("Something went wrong in axios.");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(notSubmitted());
+    dispatch(setNullUser());
+    navigate(path.LOGIN);
+  };
+
+  return (
+    <>
+      <ProfilePageWrapper>
+        <ProfileRowContainer>
+          <PageTitle>Profile</PageTitle>
+          <PaymentMethod
+            style={{
+              marginLeft: "20px",
+            }}
+            onClick={() => {
+              setIsShow(true);
+            }}
+          >
+            Update Profile
+          </PaymentMethod>
+        </ProfileRowContainer>
+
+        <Divider />
+        <Modal
+          isOpen={isShow}
+          title="Update Account"
+          toggleModal={() => {
+            setIsShow((prevState) => !prevState);
+          }}
+        >
+          <UpdateProfilePage />
+        </Modal>
+        <SemiTitle>Account</SemiTitle>
+        {/* <LinkedAccounts>Linked Accounts</LinkedAccounts> */}
+
+        {/* <RowContainer>
+          <FcGoogle size={"4rem"} style={{ marginRight: "10px" }} />
+          <SmallText>google@gmail.com</SmallText>
+        </RowContainer> */}
+
+        
