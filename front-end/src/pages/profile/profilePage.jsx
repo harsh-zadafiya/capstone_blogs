@@ -148,4 +148,53 @@ const ProfilePage = () => {
                   justifyContent: "flex-end",
                 }}
               >
-              
+                <RedButton onClick={handleLogout}>LogOut</RedButton>
+              </div>
+            </form>
+          </Modal>
+        </AccountRow>
+
+        <Divider />
+
+        {/* <RowContainer>
+          <SmallText style={{ color: "gray", fontSize: "14px" }}>
+            Powered by
+          </SmallText>
+          <StripeLogo src={Stripe} />
+        </RowContainer> */}
+      </ProfilePageWrapper>
+    </>
+  );
+};
+
+export default ProfilePage;
+
+const ProfilePageWrapper = styled.div`
+  padding-top: 50px;
+  width: 50%;
+  float: left;
+  vertical-align: bottom;
+  background-color: #ffffff;
+
+  @media screen and (max-width: 580px) {
+    width: 100%;
+  }
+`;
+
+const PageTitle = styled.h1`
+  font-size: 35px;
+  font-weight: bold;
+`;
+
+const Divider = styled.hr`
+  border: 1.5px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #dbdbdb;
+  border-radius: 10px;
+`;
+
+const SemiTitle = styled.h2`
+  font-size: 22px;
+  font-weight: bold;
+`;
