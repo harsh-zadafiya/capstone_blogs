@@ -1,0 +1,45 @@
+
+.app_forgot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.forgot_div {
+  background-color: white;
+  padding: 2rem;
+  box-shadow: 0 5px 30px 0 rgba(55, 84, 170, 0.16);
+  border-radius: 8px;
+}
+
+.name_title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.forgot_tittle_div {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  font-size: 26px;
+}
+.video-wrapper_forgot {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; 
+  z-index: -1;
+}
+
+.video-wrapper_forgot video {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
+  filter: blur(15px);
+}
