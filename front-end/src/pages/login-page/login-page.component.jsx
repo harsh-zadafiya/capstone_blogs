@@ -1,17 +1,15 @@
+
 import React from "react";
 import "./login-page.styles.scss";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../../../../../Downloads/capstone_blog 3/front-end/src/components/button/button.component";
+import Button from "../../components/button/button.component";
 import { Link } from "react-router-dom";
-import InputField from "../../../../../../../Downloads/capstone_blog 3/front-end/src/components/input-field/input-field.component";
-import {
-  submitted,
-  setLoginUser,
-} from "../../../../../../../Downloads/capstone_blog 3/front-end/src/redux/isLogin.reducers";
-import path from "../../../../../../../Downloads/capstone_blog 3/front-end/src/constants/paths";
-import bannerVideo from "../../assets/bannerVideo.mp4";
+import InputField from "../../components/input-field/input-field.component";
+import { submitted, setLoginUser } from "../../redux/isLogin.reducers";
+import path from "../../constants/paths";
 import axios from "axios";
+import bannerVideo from "../../assets/bannerVideo.mp4";
 
 function LoginPage() {
   const navigate = useNavigate();
