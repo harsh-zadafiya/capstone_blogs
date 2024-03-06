@@ -65,7 +65,7 @@ const NewListingsListPage = () => {
               await fetchCarListings("/listing?filter=all");
             }}
           >
-            All listings
+            All Blogs
           </Tab>
           <Tab
             active={activeTab === tabNames.FAVORITE}
@@ -74,7 +74,7 @@ const NewListingsListPage = () => {
               await fetchCarListings("/listing?filter=favorite");
             }}
           >
-            Favorite Listings
+            Favorite Blogs
           </Tab>
           <Tab
             active={activeTab === tabNames.MY_LISTINGS}
@@ -83,7 +83,7 @@ const NewListingsListPage = () => {
               await fetchCarListings("/listing?filter=my-listings");
             }}
           >
-            My Listings
+            My Blogs
           </Tab>
         </TabsWrapper>
         <CarsList>
