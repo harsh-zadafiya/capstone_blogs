@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const { job } = require("./utils/cronjob");
+// const { job } = require("./utils/cronjob");
 
 var bodyParser = require("body-parser");
 
@@ -52,5 +52,5 @@ app.use("/comparecar", compareRouter);
 
 app.use(globalErrorHandlerMiddleware);
 app.listen(PORT, () => {
-  console.log(`Bid My Ride Server is running on port: ${PORT}`);
+  console.log(`Canada 4 U server is running on port: ${PORT}`);
 });
