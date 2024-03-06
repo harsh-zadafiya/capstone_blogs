@@ -22,3 +22,62 @@
     border-radius: 8px;
 }
 
+.list-container {
+    display: flex;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.title_login {
+    font-size: 26px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+
+.title_login_bid {
+    font-size: 32px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+
+.input-con-login {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+}
+
+.login_lable {
+    font-size: 13px;
+    margin-top: 13px;
+    font-weight: bold;
+}
+
+.sign-up-option {
+    justify-content: center;
+    text-align: center;
+}
+
+.video-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(15px);
+}
