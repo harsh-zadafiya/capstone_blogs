@@ -106,7 +106,7 @@ function LoginPage() {
             </div>
 
             <br />
-            {/* <h4 style={{ textAlign: "right" }}>
+            <h4 style={{ textAlign: "right" }}>
               <Link
                 style={{
                   color: "#1091e1",
@@ -117,7 +117,7 @@ function LoginPage() {
               >
                 forgot password?
               </Link>
-            </h4> */}
+            </h4>
             <br />
             <div className="sign-up-option">
               <h4
