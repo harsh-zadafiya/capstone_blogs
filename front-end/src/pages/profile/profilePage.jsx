@@ -198,3 +198,109 @@ const SemiTitle = styled.h2`
   font-size: 22px;
   font-weight: bold;
 `;
+
+const LinkedAccounts = styled.h4`
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+`;
+
+const RowContainer = styled.div`
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+`;
+
+const ProfileRowContainer = styled.div`
+  justify-content: space-between;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+`;
+
+const AccountRow = styled.div`
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 580px) {
+    font-size: 14px;
+  }
+`;
+
+const SmallText = styled.h2`
+  align-self: center;
+  font-size: 18px;
+  font-weight: 500;
+
+  @media screen and (max-width: 580px) {
+    font-size: 16px;
+  }
+`;
+
+const RemoveAccountButton = styled.button`
+  background-color: #f5f5f5;
+  align-self: center;
+  font-size: 15px;
+  width: 150px;
+  min-height: 30px;
+  border-radius: 3px;
+  border: 2px solid #bebebe;
+
+  :hover {
+    border: 2px solid #e61616a0;
+    background-color: #dad8d8;
+  }
+  :active {
+    background-color: #c0c0c0;
+  }
+
+  @media screen and (max-width: 580px) {
+    max-width: 120px;
+    font-size: 13px;
+  }
+`;
+export const PaymentMethod = styled.button`
+  background-color: #17b9ec;
+  color: white;
+  margin-left: auto;
+  margin-top: 12px;
+  align-self: center;
+  font-size: 15px;
+  width: 180px;
+  min-height: 35px;
+  border-radius: 3px;
+  border: none;
+
+  :hover {
+    background-color: #00c3ff;
+  }
+`;
+
+const StripeLogo = styled.img`
+  margin-left: -15px;
+  width: 100px;
+  height: 40px;
+  scale: 0.55;
+`;
+const LogoutButton = styled.button`
+  background-color: #05000097;
+  color: white;
+  margin-left: 15px;
+  align-self: center;
+  font-size: 15px;
+  width: 150px;
+  min-height: 30px;
+  border-radius: 3px;
+  border: 1px solid black;
+
+  :hover {
+    background-color: #202020;
+  }
+  @media screen and (max-width: 580px) {
+    max-width: 120px;
+    font-size: 14px;
+  }
+`;
