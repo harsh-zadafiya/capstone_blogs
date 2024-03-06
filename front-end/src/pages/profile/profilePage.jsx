@@ -98,4 +98,54 @@ const ProfilePage = () => {
           <SmallText>google@gmail.com</SmallText>
         </RowContainer> */}
 
-        
+        <AccountRow>
+          <RemoveAccountButton
+            onClick={() => {
+              setIsDelete(true);
+            }}
+          >
+            {" "}
+            Delete Account{" "}
+          </RemoveAccountButton>
+          <Modal
+            isOpen={isDelete}
+            title="DELETE ACCOUNT"
+            toggleModal={() => {
+              setIsDelete((prevState) => !prevState);
+            }}
+          >
+            <form>
+              <h4>Are you sure you want to delete your account?</h4>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <RedButton onClick={handleRemoveAccount}>Delete</RedButton>
+              </div>
+            </form>
+          </Modal>
+          <LogoutButton
+            onClick={(e) => {
+              setIsLogout((prevState) => !prevState);
+            }}
+          >
+            Logout
+          </LogoutButton>
+          <Modal
+            isOpen={isLogout}
+            title="LOGOUT"
+            toggleModal={() => {
+              setIsLogout((prevState) => !prevState);
+            }}
+          >
+            <form>
+              <h4>Are you sure you want to LogOut?</h4>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+              
