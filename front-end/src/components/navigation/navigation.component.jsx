@@ -72,7 +72,7 @@ const Navigation = () => {
                     : ""
                 }`}
               >
-                New Listings
+                New Blogs
               </Link>
             </div>
 
@@ -116,7 +116,7 @@ const Navigation = () => {
                 setIsNavigationOpen(false);
               }}
             >
-              Sell A Car
+              Add New Blog
             </Button>
           </Link>
         </div>

@@ -7,7 +7,7 @@ const Dropdown = ({ label, error, ...otherProps }) => (
       <span className="required">{otherProps.required ? " *" : ""}</span>
     </label>
     <select className="form__field" {...otherProps}>
-      <option value="">-- Please Select Transmission --</option>
+      <option value="">-- Please Select Category --</option>
       <option value="travelling">Traveling</option>
       <option value="food">Food</option>
     </select>
