@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import path from "../../constants/paths";
-// import { ReactComponent as MileageIcon } from "../../assets/mileage.svg";
+import { ReactComponent as MileageIcon } from "../../assets/mileage.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location.svg";
 // import { ReactComponent as EngineIcon } from "../../assets/engine.svg";
 import { ReactComponent as TransmissionIcon } from "../../assets/transmission.svg";
@@ -88,10 +88,10 @@ const CarCard = ({ car }) => {
             <ListingStatus status={status} />
           </CardHeader>
           <CardProperties>
-            {/* <CardProperty>
+            <CardProperty>
               <MileageIcon />
               <span>{carMileage}</span>
-            </CardProperty> */}
+            </CardProperty>
             <CardProperty>
               <LocationIcon />
               <span>{location}</span>

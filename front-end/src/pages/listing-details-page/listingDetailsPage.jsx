@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { ReactComponent as MileageIcon } from "../../assets/mileage.svg";
+import { ReactComponent as MileageIcon } from "../../assets/mileage.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location.svg";
 import { ReactComponent as EngineIcon } from "../../assets/engine.svg";
 import { ReactComponent as TransmissionIcon } from "../../assets/transmission.svg";
@@ -406,7 +406,7 @@ const ListingDetailsPage = () => {
         <CarDetailsBody>
           <CarProperties>
             <CarProperty>
-              {/* <MileageIcon /> */}
+              <MileageIcon />
               <PropertyWrapper>
                 <PropertyTitle>Date</PropertyTitle>
                 <PropertyValue>{carMileage}</PropertyValue>
