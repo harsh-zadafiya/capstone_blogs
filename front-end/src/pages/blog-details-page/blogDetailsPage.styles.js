@@ -5,7 +5,7 @@ import { ReactComponent as Edit } from "../../assets/edit.svg";
 import { ReactComponent as Upload } from "../../assets/upload.svg";
 import { ReactComponent as Download } from "../../assets/download.svg";
 
-export const CarDetailsPage = styled.div`
+export const BlogDetailsPage = styled.div`
   overflow: scroll;
   height: 95vh;
   position: relative;
@@ -15,7 +15,7 @@ export const CarDetailsPage = styled.div`
   }
 `;
 
-export const CarDetailsTop = styled.div`
+export const BlogDetailsTop = styled.div`
   overflow: auto;
 
   @media only screen and (max-width: 768px) {
@@ -34,7 +34,7 @@ export const Image = styled.img`
   }
 `;
 
-export const CarImages = styled.div`
+export const BlogImages = styled.div`
   display: grid;
   height: 40vh;
   grid-template-columns: repeat(10, 1fr);
@@ -75,7 +75,7 @@ export const CarImages = styled.div`
   }
 `;
 
-export const CarHeader = styled.div`
+export const BlogHeader = styled.div`
   position: sticky;
   top: 0;
   left: 0;
@@ -126,7 +126,7 @@ export const ActionButtons = styled.div`
   overflow: visible;
 `;
 
-export const CarTitle = styled.h2`
+export const BlogTitle = styled.h2`
   font-size: 2.2rem;
   font-weight: 600;
 `;
@@ -228,7 +228,7 @@ export const DownloadIcon = styled(Download)`
   }
 `;
 
-export const CarDetailsBody = styled.div`
+export const BlogDetailsBody = styled.div`
   display: grid;
   align-content: start;
   grid-template-columns: 20% 1fr;
@@ -247,7 +247,7 @@ export const CarDetailsBody = styled.div`
   }
 `;
 
-export const CarProperties = styled.div`
+export const BlogProperties = styled.div`
   align-self: start;
   display: flex;
   flex-direction: column;
@@ -263,7 +263,7 @@ export const CarProperties = styled.div`
   }
 `;
 
-export const CarProperty = styled.div`
+export const BlogProperty = styled.div`
   background-color: white;
   padding: 0.6rem 1.6rem;
   display: flex;
@@ -310,7 +310,7 @@ export const DescriptionGroup = styled.div`
   padding-block: 1.6rem;
 `;
 
-export const CarDescription = styled.div`
+export const BlogDescription = styled.div`
   padding-inline: 2rem;
   display: flex;
   flex-direction: column;

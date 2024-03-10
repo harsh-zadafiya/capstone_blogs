@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <h1>Send a Blog Approval request now.</h1>
-      <Link to={path.SELL_CAR}>
+      <Link to={path.ADD_NEW_BLOG}>
         <Button>Publish Your Blog</Button>
       </Link>
     </div>

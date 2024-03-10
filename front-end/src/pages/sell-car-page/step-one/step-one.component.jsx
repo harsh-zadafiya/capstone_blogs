@@ -6,11 +6,9 @@ import { direction } from "../../../constants/sellCar";
 
 const StepOne = ({ switchTab, initialData, action }) => {
   const emptyDataSet = {
-    carCompany: "",
-    carModel: "",
-    carMileage: "",
-    carEngine: "",
-    vin: "",
+    blogTitle: "",
+    blogYear: "",
+    subTitle: "",
   };
   const INITIAL_STATE =
     Object.keys(initialData).length === 0 ? emptyDataSet : initialData;
@@ -18,13 +16,11 @@ const StepOne = ({ switchTab, initialData, action }) => {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [errorMessage, setErrorMessage] = useState(emptyDataSet);
 
-  const { carCompany, carModel, carMileage, carEngine, vin } = formData;
+  const { blogTitle, blogYear, subTitle } = formData;
   const {
-    carCompany: carCompanyError,
-    carModel: carModelError,
-    carMileage: carMileageError,
-    carEngine: carEngineError,
-    vin: vinError,
+    blogTitle: blogTitleError,
+    blogYear: blogYearError,
+    subTitle: subTitleError,
   } = errorMessage;
 
   const handleOnChange = (e) => {
@@ -56,8 +52,8 @@ const StepOne = ({ switchTab, initialData, action }) => {
         type="text"
         id="carCompany"
         name="carCompany"
-        value={carCompany}
-        error={carCompanyError}
+        value={blogTitle}
+        error={blogTitleError}
         handleOnChange={handleOnChange}
         required
       />
@@ -66,28 +62,8 @@ const StepOne = ({ switchTab, initialData, action }) => {
         type="text"
         id="car-model"
         name="carModel"
-        value={carModel}
-        error={carModelError}
-        handleOnChange={handleOnChange}
-        required
-      />
-      <InputField
-        label="Car Mileage"
-        type="number"
-        id="car-mileage"
-        name="carMileage"
-        value={carMileage}
-        error={carMileageError}
-        handleOnChange={handleOnChange}
-        required
-      />
-      <InputField
-        label="Car Engine"
-        type="text"
-        id="car-engine"
-        name="carEngine"
-        value={carEngine}
-        error={carEngineError}
+        value={blogYear}
+        error={blogYearError}
         handleOnChange={handleOnChange}
         required
       />
@@ -97,8 +73,8 @@ const StepOne = ({ switchTab, initialData, action }) => {
         type="text"
         id="vin"
         name="vin"
-        value={vin}
-        error={vinError}
+        value={subTitle}
+        error={subTitleError}
         handleOnChange={handleOnChange}
         required
       />

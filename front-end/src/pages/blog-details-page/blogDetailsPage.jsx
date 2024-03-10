@@ -7,19 +7,18 @@ import { ReactComponent as LocationIcon } from "../../assets/location.svg";
 import { ReactComponent as EngineIcon } from "../../assets/engine.svg";
 import { ReactComponent as TransmissionIcon } from "../../assets/transmission.svg";
 
-import path from "../../constants/paths";
+import path from "../../constants/paths.js";
 
 import {
   ActionButtons,
-  CarDescription,
-  CarDetailsBody,
-  CarDetailsPage,
-  CarDetailsTop,
-  CarHeader,
-  CarImages,
-  CarProperties,
-  CarProperty,
-  CarTitle,
+  BlogDescription,
+  BlogDetailsBody,
+  BlogDetailsTop,
+  BlogHeader,
+  BlogImages,
+  BlogProperties,
+  BlogProperty,
+  BlogTitle,
   DeleteIcon,
   DescriptionGroup,
   DescriptionHeading,
@@ -35,31 +34,31 @@ import {
   Text,
   TitleGroup,
   UploadIcon,
-} from "./listingDetailsPage.styles";
+} from "./blogDetailsPage.styles.js";
 import {
   CardButtons,
   CardSubTitle,
   GreenButton,
   RedButton,
-} from "../../components/CarCard/CarCard.styels";
-import FavouriteIcon from "../../components/FavouriteIcon/favouriteIcon";
-import Button from "../../components/button/button.component";
+} from "../../components/BlogCard/BlogCard.styels.js";
+import FavouriteIcon from "../../components/FavouriteIcon/favouriteIcon.jsx";
+import Button from "../../components/button/button.component.jsx";
 
 import { ReactComponent as BackArrow } from "../../assets/back-arrow.svg";
 import {
-  deleteCarListings,
-  updateCarListings,
-} from "../../redux/car-listing/carListing.reducers";
-import ListingStatus from "../../components/ListingStatus/ListingStatus.component";
+  deleteBlogListings,
+  updateBlogListings
+} from "../../redux/blog-listing/blogListing.reducers.js";
+import ListingStatus from "../../components/ListingStatus/ListingStatus.component.jsx";
 import ConfirmationModal from "../../components/ConfirmationModal/ConfirmationModal.jsx";
-import axios from "../../utils/axios";
+import axios from "../../utils/axios.js";
 import Modal from "../../components/Modal/Modal.jsx";
 
 import { ReactComponent as WarningVector } from "../../assets/warning.svg";
 import ToolTip from "../../components/ToolTip/ToolTip.jsx";
-import { Input } from "../sell-car-page/step-three/stepThree.style";
+import { Input } from "../sell-car-page/step-three/stepThree.style.js";
 
-const ListingDetailsPage = () => {
+const BlogDetailsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.loginStatus.userInfo);
@@ -70,36 +69,34 @@ const ListingDetailsPage = () => {
   const [uploadModal, setUploadModal] = useState(false);
   const [documents, setDocuments] = useState([]);
 
-  const { vin } = useParams();
-  const car = useSelector((state) => state.carListing.cars).find(
-    (car) => car.vin === vin
+  const { subTitle } = useParams();
+  const blog = useSelector((state) => state.blogListing.blogs).find(
+    (blog) => blog.subTitle === subTitle
   );
 
   const {
-    carCompany,
-    carMileage,
-    transmission,
+    blogTitle,
+    category,
     location,
-    carModel,
-    vin: carVIN,
+    blogYear,
+    subTitle: blogSubTitle,
     highlight,
-    recentServiceHistory,
-    ownershipHistory,
-    sellerNotes,
-    sellerName,
+    blogDetails,
+    blogNotes,
+    authorName,
     status,
     favorite,
     userId,
-  } = car;
+  } = blog;
 
   return (
     <>
-      <CarDetailsPage>
+      <BlogDetailsPage>
         <ConfirmationModal
           title="Accept Confirmation"
-          description="Are you sure you want to approve this listing?"
+          description="Are you sure you want to approve this blog?"
           currentStatus="approve"
-          vin={carVIN}
+          vin={blogSubTitle}
           approveModal={approveModal}
           setModal={(state) => {
             setApproveModal(state);
@@ -110,9 +107,9 @@ const ListingDetailsPage = () => {
         />
         <ConfirmationModal
           currentStatus="reject"
-          vin={carVIN}
+          vin={blogSubTitle}
           title="Reject Confirmation"
-          description="Are you sure you want to reject this listing?"
+          description="Are you sure you want to reject this blog?"
           approveModal={rejectModal}
           setModal={(state) => {
             setRejectModal(state);
@@ -139,8 +136,8 @@ const ListingDetailsPage = () => {
               await axios.post(
                 "/document/upload",
                 {
-                  vin,
-                  carCompany,
+                  subTitle,
+                  blogTitle,
                   documents,
                 },
                 {
@@ -218,7 +215,7 @@ const ListingDetailsPage = () => {
                   margin: "0 auto",
                 }}
               >
-                Make sure you are 100% sure about deleting this listing. You
+                Make sure you are 100% sure about deleting this blog. You
                 will not be able to recover it back.
               </p>
             </div>
@@ -253,9 +250,9 @@ const ListingDetailsPage = () => {
               <RedButton
                 onClick={async () => {
                   setDeleteModal(false);
-                  await axios.delete(`/listing/${carVIN}`);
-                  dispatch(deleteCarListings({ vin: carVIN }));
-                  navigate(path.NEW_LISTINGS);
+                  await axios.delete(`/listing/${blogSubTitle}`);
+                  dispatch(deleteBlogListings({ subTitle: blogSubTitle }));
+                  navigate(path.NEW_BLOGS);
                 }}
               >
                 Delete
@@ -263,29 +260,29 @@ const ListingDetailsPage = () => {
             </div>
           </div>
         </Modal>
-        <CarDetailsTop>
-          <CarImages>
-            {car.images.map((image, i) => {
+        <BlogDetailsTop>
+          <BlogImages>
+            {blog.images.map((image, i) => {
               if (i <= 7) {
-                return <Image src={image} alt="Car Image" key={image} />;
+                return <Image src={image} alt="Blog Image" key={image} />;
               } else {
                 return <></>;
               }
             })}
-          </CarImages>
-        </CarDetailsTop>
-        <CarHeader>
+          </BlogImages>
+        </BlogDetailsTop>
+        <BlogHeader>
           <HeaderLeft>
-            <Link to={path.NEW_LISTINGS}>
+            <Link to={path.NEW_BLOGS}>
               <IconWrapper>
                 <BackArrow />
               </IconWrapper>
             </Link>
             <TitleGroup>
-              <CarTitle>
-                {carCompany} {carModel}
-              </CarTitle>
-              <CardSubTitle>{carVIN}</CardSubTitle>
+              <BlogTitle>
+                {blogTitle} {blogYear}
+              </BlogTitle>
+              <CardSubTitle>{blogSubTitle}</CardSubTitle>
             </TitleGroup>
             <ListingStatus status={status} />
           </HeaderLeft>
@@ -330,7 +327,7 @@ const ListingDetailsPage = () => {
                   <ToolTip hoverText="Edit">
                     <EditIcon
                       onClick={() => {
-                        navigate(`${path.SELL_CAR}/${carVIN}`);
+                        navigate(`${path.ADD_NEW_BLOG}/${blogSubTitle}`);
                       }}
                     />
                   </ToolTip>
@@ -360,9 +357,9 @@ const ListingDetailsPage = () => {
                   <ToolTip hoverText="Download">
                     <DownloadIcon
                       onClick={async () => {
-                        console.log(`/document/download/${carVIN}`);
+                        console.log(`/document/download/${blogSubTitle}`);
                         axios
-                          .get(`/document/download/${carVIN}`, {
+                          .get(`/document/download/${blogSubTitle}`, {
                             headers: {
                               "x-access-token": localStorage.getItem("token"),
                             },
@@ -374,7 +371,7 @@ const ListingDetailsPage = () => {
                             );
                             const a = document.createElement("a");
                             a.href = url;
-                            a.setAttribute("download", `${vin}.zip`);
+                            a.setAttribute("download", `${subTitle}.zip`);
                             document.body.appendChild(a);
                             a.click();
 
@@ -391,42 +388,41 @@ const ListingDetailsPage = () => {
                 favourite={favorite}
                 handleOnClick={async () => {
                   const { data: response } = await axios.post(
-                    `/listing/favorite/${carVIN}`,
+                    `/listing/favorite/${blogSubTitle}`,
                     {
                       favorite: !favorite,
                     }
                   );
                   console.log(response);
-                  dispatch(updateCarListings(response.car));
+                  dispatch(updateBlogListings(response.blog));
                 }}
               />
             </ActionButtons>
           </HeaderRight>
-        </CarHeader>
-        <CarDetailsBody>
-          <CarProperties>
-            <CarProperty>
+        </BlogHeader>
+        <BlogDetailsBody>
+          <BlogProperties>
+            <BlogProperty>
               <MileageIcon />
               <PropertyWrapper>
                 <PropertyTitle>Date</PropertyTitle>
-                <PropertyValue>{carMileage}</PropertyValue>
               </PropertyWrapper>
-            </CarProperty>
+            </BlogProperty>
 
-            <CarProperty>
+            <BlogProperty>
               <LocationIcon />
               <PropertyWrapper>
                 <PropertyTitle>Location</PropertyTitle>
                 <PropertyValue>{location}</PropertyValue>
               </PropertyWrapper>
-            </CarProperty>
-            <CarProperty>
+            </BlogProperty>
+            <BlogProperty>
               <TransmissionIcon />
               <PropertyWrapper>
                 <PropertyTitle>Category</PropertyTitle>
-                <PropertyValue>{transmission}</PropertyValue>
+                <PropertyValue>{category}</PropertyValue>
               </PropertyWrapper>
-            </CarProperty>
+            </BlogProperty>
             {/* <CarProperty>
               <EngineIcon />
               <PropertyWrapper>
@@ -434,11 +430,11 @@ const ListingDetailsPage = () => {
                 <PropertyValue>{carEngine}</PropertyValue>
               </PropertyWrapper>
             </CarProperty> */}
-          </CarProperties>
-          <CarDescription>
+          </BlogProperties>
+          <BlogDescription>
             <DescriptionGroup>
               <DescriptionHeading>Author Name</DescriptionHeading>
-              <Text>{sellerName}</Text>
+              <Text>{authorName}</Text>
             </DescriptionGroup>
             <DescriptionGroup>
               <DescriptionHeading>Highlights</DescriptionHeading>
@@ -446,23 +442,23 @@ const ListingDetailsPage = () => {
             </DescriptionGroup>
             <DescriptionGroup>
               <DescriptionHeading>Blog Details</DescriptionHeading>
-              <Text>{ownershipHistory}</Text>
+              <Text>{blogDetails}</Text>
             </DescriptionGroup>
             <DescriptionGroup>
               <DescriptionHeading>Comments</DescriptionHeading>
-              <Text>{recentServiceHistory}</Text>
+           
             </DescriptionGroup>
-            {sellerNotes ? (
+            {blogNotes ? (
               <DescriptionGroup>
                 <DescriptionHeading>Seller Notes</DescriptionHeading>
-                <Text>{sellerNotes}</Text>
+                <Text>{blogNotes}</Text>
               </DescriptionGroup>
             ) : null}
-          </CarDescription>
-        </CarDetailsBody>
-      </CarDetailsPage>
+          </BlogDescription>
+        </BlogDetailsBody>
+      </BlogDetailsPage>
     </>
   );
 };
 
-export default ListingDetailsPage;
+export default BlogDetailsPage;

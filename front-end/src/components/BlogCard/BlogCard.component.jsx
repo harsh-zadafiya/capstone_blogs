@@ -25,16 +25,16 @@ import {
   FavIconWrapper,
   GreenButton,
   RedButton,
-} from "./CarCard.styels";
+} from "./BlogCard.styels";
 
 import FavouriteIcon from "../FavouriteIcon/favouriteIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCarListings } from "../../redux/car-listing/carListing.reducers";
+import { updateBlogListings } from "../../redux/blog-listing/blogListing.reducers";
 import ListingStatus from "../ListingStatus/ListingStatus.component";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import axios from "../../utils/axios";
 
-const CarCard = ({ car }) => {
+const BlogCard = ({ blog }) => {
   const [approveModal, setApproveModal] = useState(false);
   const [rejectModal, setRejectModal] = useState(false);
 
@@ -43,17 +43,15 @@ const CarCard = ({ car }) => {
   const user = useSelector((state) => state.loginStatus.userInfo);
 
   const {
-    carCompany,
-    carModel,
+    blogTitle,
+    blogYear,
     favorite,
-    vin,
-    carMileage,
+    subTitle,
     location,
-    carEngine,
     images,
-    transmission,
+    category,
     status,
-  } = car;
+  } = blog;
 
   return (
     <>
@@ -67,13 +65,13 @@ const CarCard = ({ car }) => {
               favourite={favorite}
               handleOnClick={async () => {
                 const { data: response } = await axios.post(
-                  `/listing/favorite/${vin}`,
+                  `/listing/favorite/${subTitle}`,
                   {
                     favorite: !favorite,
                   }
                 );
 
-                dispatch(updateCarListings(response.car));
+                dispatch(updateBlogListings(response.blog));
               }}
             />
           </FavIconWrapper>
@@ -82,8 +80,8 @@ const CarCard = ({ car }) => {
         <CardBody>
           <CardHeader>
             <div>
-              <CardTitle>{`${carCompany} ${carModel}`}</CardTitle>
-              <CardSubTitle>{vin}</CardSubTitle>
+              <CardTitle>{`${blogTitle} ${blogYear}`}</CardTitle>
+              <CardSubTitle>{subTitle}</CardSubTitle>
             </div>
             <ListingStatus status={status} />
           </CardHeader>
@@ -98,7 +96,7 @@ const CarCard = ({ car }) => {
             </CardProperty>
             <CardProperty>
               <TransmissionIcon />
-              <span>{transmission}</span>
+              <span>{category}</span>
             </CardProperty>
             {/* <CardProperty>
               <EngineIcon />
@@ -110,7 +108,7 @@ const CarCard = ({ car }) => {
           <CardButtons>
             <CardButton
               onClick={() => {
-                navigate(`${path.NEW_LISTINGS}/${vin}`);
+                navigate(`${path.NEW_BLOGS}/${subTitle}`);
               }}
             >
               More
@@ -135,7 +133,7 @@ const CarCard = ({ car }) => {
         ) : (
           <CardButton
             onClick={() => {
-              navigate(`${path.NEW_LISTINGS}/${vin}`);
+              navigate(`${path.NEW_BLOGS}/${subTitle}`);
             }}
           >
             More Info
@@ -145,9 +143,9 @@ const CarCard = ({ car }) => {
 
       <ConfirmationModal
         currentStatus="approve"
-        vin={vin}
+        vin={subTitle}
         title="Accept Confirmation"
-        description="Are you sure you want to accept this listing?"
+        description="Are you sure you want to accept this blog?"
         approveModal={approveModal}
         setModal={(state) => {
           setApproveModal(state);
@@ -158,9 +156,9 @@ const CarCard = ({ car }) => {
       />
       <ConfirmationModal
         currentStatus="reject"
-        vin={vin}
+        vin={subTitle}
         title="Reject Confirmation"
-        description="Are you sure you want to reject this listing?"
+        description="Are you sure you want to reject this blog?"
         approveModal={rejectModal}
         setModal={(state) => {
           setRejectModal(state);
@@ -173,4 +171,4 @@ const CarCard = ({ car }) => {
   );
 };
 
-export default CarCard;
+export default BlogCard;

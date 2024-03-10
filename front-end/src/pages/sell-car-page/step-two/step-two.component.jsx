@@ -7,12 +7,11 @@ import InputField from "../../../components/input-field/input-field.component";
 import Button from "../../../components/button/button.component";
 
 const emptyDataSet = {
-  sellerName: "",
+  authorName: "",
   location: "",
   highlight: "",
-  recentServiceHistory: "",
-  ownershipHistory: "",
-  sellerNotes: "",
+  blogDetails: "",
+  blogNotes: "",
 };
 
 const StepTwo = ({
@@ -25,20 +24,17 @@ const StepTwo = ({
   onBlur,
 }) => {
   const {
-    sellerName,
+    authorName,
     location,
-    highlight,
-    recentServiceHistory,
-    ownershipHistory,
-    sellerNotes,
+    blogDetails,
+    blogNotes,
   } = formData;
   const {
-    sellerName: sellerNameError,
+    authorName: authorNameError,
     location: locationError,
     highlight: highlightError,
-    recentServiceHistory: recentServiceHistoryError,
-    ownershipHistory: ownershipHistoryError,
-    sellerNotes: sellerNotesError,
+    blogDetails: blogDetailsError,
+    blogNotes: blogNotesError,
   } = errorMessage;
 
   return (
@@ -48,8 +44,8 @@ const StepTwo = ({
         type="text"
         id="sellerName"
         name="sellerName"
-        value={sellerName}
-        error={sellerNameError}
+        value={authorName}
+        error={authorNameError}
         handleOnChange={handleOnChange}
         required
         onInvalid={onInvalid}
@@ -102,8 +98,8 @@ const StepTwo = ({
         id="ownershipHistory"
         name="ownershipHistory"
         rows="6"
-        value={ownershipHistory}
-        error={ownershipHistoryError}
+        value={blogDetails}
+        error={blogDetailsError}
         onChange={handleOnChange}
         required
         maxLength={1800}
@@ -114,9 +110,10 @@ const StepTwo = ({
         label="Blog Notes"
         id="sellerNotes"
         name="sellerNotes"
+        
         rows="6"
-        value={sellerNotes}
-        error={sellerNotesError}
+        value={blogNotes}
+        error={blogNotesError}
         onChange={handleOnChange}
         maxLength={1800}
         onInvalid={onInvalid}

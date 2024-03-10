@@ -1,31 +1,30 @@
 import { Route, Routes } from "react-router-dom";
-import path from "./constants/paths";
-import Navigation from "./components/navigation/navigation.component";
+import path from "./constants/paths.js";
+import Navigation from "./components/navigation/navigation.component.jsx";
 import "./App.scss";
-import ProfilePage from "./pages/profile/profilePage";
+import ProfilePage from "./pages/profile/profilePage.jsx";
 import { ModalProvider } from "styled-react-modal";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
   HomePage,
-  NewListingsPage,
-  SellCarPage,
+  AddNewBlog,
   LoginPage,
   RegistrationPage,
   ForgotPage,
-  NewListingsListPage,
-  NewListingDetailsPage,
+  NewBlogsListPage,
+  BlogDetailsPage,
   UpdateProfilePage,
   NotFoundPage,
-} from "./pages";
-import EditCarDetailsPage from "./pages/EditCarDetails/EditCarDetails.jsx";
+} from "./pages/index.js";
+import EditBlogDetailsPage from "./pages/EditBlogDetails/EditBlogDetails.jsx";
 import React, { useEffect } from "react";
 import {
   notSubmitted,
   submitted,
   setLoginUser,
   setNullUser,
-} from "./redux/isLogin.reducers";
+} from "./redux/isLogin.reducers.js";
 import axios from "axios";
 
 function App() {
@@ -66,16 +65,16 @@ function App() {
             <div className="main-section">
               <Routes>
                 <Route path={path.HOME} exact element={<HomePage />} />
-                <Route path={path.SELL_CAR} element={<SellCarPage />} />
+                <Route path={path.ADD_NEW_BLOG} element={<AddNewBlog />} />
 
-                <Route path={path.NEW_LISTINGS} element={<NewListingsPage />}>
+                <Route path={path.MY_BLOGS} element={<NewBlogsListPage />}>
                   <Route
-                    path={`${path.NEW_LISTINGS}/`}
-                    element={<NewListingsListPage />}
+                    path={`${path.MY_BLOGS}/`}
+                    element={<NewBlogsListPage />}
                   />
                   <Route
                     path={`${path.NEW_LISTINGS}/:vin`}
-                    element={<NewListingDetailsPage />}
+                    element={<BlogDetailsPage />}
                   />
                 </Route>
 
@@ -87,14 +86,14 @@ function App() {
                 />
 
                 <Route
-                  path={path.MY_LISTINGS}
+                  path={path.MY_BLOGS}
                   exact
                   element={<div>MY LISTINGS....</div>}
                 />
                 <Route
-                  path={`${path.SELL_CAR}/:vin`}
+                  path={`${path.ADD_NEW_BLOG}/:vin`}
                   exact
-                  element={<EditCarDetailsPage />}
+                  element={<EditBlogDetailsPage />}
                 />
               </Routes>
             </div>

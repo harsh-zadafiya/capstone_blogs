@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CarCard from "../../components/CarCard/CarCard.component";
+import BlogCard from "../../components/BlogCard/BlogCard.component";
 import Spinner from "../../components/Spinner/Spinner";
-import { fetchCarListingsSuccesss } from "../../redux/car-listing/carListing.reducers";
+import { fetchBlogListingsSuccesss } from "../../redux/blog-listing/blogListing.reducers";
 import axios from "../../utils/axios";
 import {
-  CarListingsWrapper,
-  CarsList,
+  BlogListingsWrapper,
+  BlogsList,
   EmptyStateDescription,
   EmptyStateTitle,
   EmptyStateVector,
@@ -18,16 +18,16 @@ import {
 const tabNames = {
   ALL: "all",
   FAVORITE: "favorite",
-  MY_LISTINGS: "myListings",
+  MY_LISTINGS: "myBlogs",
 };
 
-const NewListingsListPage = () => {
+const NewBlogsListPage = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState(tabNames.ALL);
-  const cars = useSelector((state) => state.carListing.cars);
+  const blogs = useSelector((state) => state.blogListing.blogs);
   const dispatch = useDispatch();
 
-  const fetchCarListings = useCallback(
+  const fetchBlogListings = useCallback(
     async (url) => {
       setLoading(true);
       const { data: response } = await axios.get(url, {
@@ -35,7 +35,7 @@ const NewListingsListPage = () => {
           "x-access-token": localStorage.getItem("token"),
         },
       });
-      dispatch(fetchCarListingsSuccesss(response.cars));
+      dispatch(fetchBlogListingsSuccesss(response.blogs));
       setLoading(false);
     },
     [dispatch]
@@ -43,26 +43,26 @@ const NewListingsListPage = () => {
 
   useEffect(() => {
     (async function () {
-      await fetchCarListings("/listing?filter=all");
+      await fetchBlogListings("/listing?filter=all");
     })();
-  }, [fetchCarListings]);
+  }, [fetchBlogListings]);
 
   return (
     <>
-      <CarListingsWrapper>
+      <BlogListingsWrapper>
         <h1
           style={{
             marginLeft: "16px",
           }}
         >
-          Listings
+          Blogs
         </h1>
         <TabsWrapper>
           <Tab
             active={activeTab === tabNames.ALL}
             onClick={async () => {
               setActiveTab(tabNames.ALL);
-              await fetchCarListings("/listing?filter=all");
+              await fetchBlogListings("/listing?filter=all");
             }}
           >
             All Blogs
@@ -71,7 +71,7 @@ const NewListingsListPage = () => {
             active={activeTab === tabNames.FAVORITE}
             onClick={async () => {
               setActiveTab(tabNames.FAVORITE);
-              await fetchCarListings("/listing?filter=favorite");
+              await fetchBlogListings("/listing?filter=favorite");
             }}
           >
             Favorite Blogs
@@ -80,17 +80,17 @@ const NewListingsListPage = () => {
             active={activeTab === tabNames.MY_LISTINGS}
             onClick={async () => {
               setActiveTab(tabNames.MY_LISTINGS);
-              await fetchCarListings("/listing?filter=my-listings");
+              await fetchBlogListings("/listing?filter=my-listings");
             }}
           >
             My Blogs
           </Tab>
         </TabsWrapper>
-        <CarsList>
+        <BlogsList>
           {loading ? (
             <Spinner />
-          ) : cars.length !== 0 ? (
-            cars.map((car) => <CarCard car={car} key={car.vin} />)
+          ) : blogs.length !== 0 ? (
+            blogs.map((blog) => <BlogCard blog={blog} key={blog.vin} />)
           ) : (
             <EmptyStateWrapper>
               <EmptyStateVector />
@@ -101,10 +101,10 @@ const NewListingsListPage = () => {
               </EmptyStateDescription>
             </EmptyStateWrapper>
           )}
-        </CarsList>
-      </CarListingsWrapper>
+        </BlogsList>
+      </BlogListingsWrapper>
     </>
   );
 };
 
-export default NewListingsListPage;
+export default NewBlogsListPage;

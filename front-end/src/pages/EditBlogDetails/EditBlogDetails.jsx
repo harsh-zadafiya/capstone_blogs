@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner/Spinner";
 import axios from "../../utils/axios";
-import SellCarPage from "../sell-car-page/sell-car-page.component";
+import AddNewBlogPage from "../sell-car-page/add-new-blog-component";
 
-const EditCarDetailsPage = () => {
+const EditBlogDetailsPage = () => {
   const { vin } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const EditCarDetailsPage = () => {
     (async function () {
       setLoading(true);
       const {
-        data: { car },
+        data: { blog },
       } = await axios.get(`/listing/${vin}`, {
         headers: {
           "x-access-token": localStorage.getItem("token"),
@@ -22,20 +22,20 @@ const EditCarDetailsPage = () => {
 
       setData({
         tabOne: {
-          carCompany: car.carCompany,
-          carModel: car.carModel,
-          carMileage: car.carMileage,
-          carEngine: car.carEngine,
-          vin: car.vin,
-          transmission: car.transmission,
+          blogCompany: blog.blogCompany,
+          blogModel: blog.blogModel,
+          blogMileage: blog.blogMileage,
+          carEngine: blog.blogEngine,
+          vin: blog.vin,
+          transmission: blog.transmission,
         },
         tabTwo: {
-          sellerName: car.sellerName,
-          location: car.location,
-          highlight: car.highlight,
-          recentServiceHistory: car.recentServiceHistory,
-          ownershipHistory: car.ownershipHistory,
-          sellerNotes: car.sellerNotes,
+          sellerName: blog.sellerName,
+          location: blog.location,
+          highlight: blog.highlight,
+          recentServiceHistory: blog.recentServiceHistory,
+          ownershipHistory: blog.ownershipHistory,
+          sellerNotes: blog.sellerNotes,
         },
       });
 
@@ -47,8 +47,8 @@ const EditCarDetailsPage = () => {
   return loading ? (
     <Spinner />
   ) : (
-    <SellCarPage initialCarData={data} action="update" />
+    <AddNewBlogPage initialCarData={data} action="update" />
   );
 };
 
-export default EditCarDetailsPage;
+export default EditBlogDetailsPage;

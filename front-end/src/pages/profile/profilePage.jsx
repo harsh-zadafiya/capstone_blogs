@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { notSubmitted, setNullUser } from "../../redux/isLogin.reducers";
 import path from "../../constants/paths";
 import axios from "axios";
-import { RedButton } from "../../components/CarCard/CarCard.styels";
+import { RedButton } from "../../components/BlogCard/BlogCard.styels";
 import Modal from "../../components/Modal/Modal.jsx";
 import UpdateProfilePage from "../update-profile-page/update-profile.component";
 

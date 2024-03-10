@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { updateCarListings } from "../../redux/car-listing/carListing.reducers";
+import { updateBlogListings } from "../../redux/blog-listing/blogListing.reducers.js";
 import axios from "../../utils/axios";
 import { GreenButton } from "../CarCard/CarCard.styels";
 import Modal from "../Modal/Modal.jsx";
@@ -20,7 +20,7 @@ const RejectModal = ({ vin, approveModal, setModal, toggle }) => {
           gap: "24px",
         }}
       >
-        <h4>Are you sure you want to approve this listing?</h4>
+        <h4>Are you sure you want to approve this blog?</h4>
         <div
           style={{
             display: "flex",
@@ -57,7 +57,7 @@ const RejectModal = ({ vin, approveModal, setModal, toggle }) => {
                 {}
               );
               console.log(response);
-              dispatch(updateCarListings(response.car));
+              dispatch(updateBlogListings(response.updateBlogListings));
             }}
           >
             Confirm Approval

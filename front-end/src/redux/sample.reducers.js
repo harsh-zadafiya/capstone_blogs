@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
-    name: "Shivam Patel",
+    name: "Mounish Talluri",
 };
 
 const sampleSlice = createSlice({

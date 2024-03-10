@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Modal from "../Modal/Modal.jsx";
 import { notSubmitted, setNullUser } from "../../redux/isLogin.reducers";
-import { RedButton } from "../CarCard/CarCard.styels";
+import { RedButton } from "../BlogCard/BlogCard.styels";
 
 const Navigation = () => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
@@ -64,10 +64,10 @@ const Navigation = () => {
                 Home
               </Link>
               <Link
-                to={path.NEW_LISTINGS}
+                to={path.NEW_BLOGS}
                 onClick={closeNavigation}
                 className={`navigation__link ${
-                  location.pathname === path.NEW_LISTINGS
+                  location.pathname === path.NEW_BLOGS
                     ? "navigation__link--active"
                     : ""
                 }`}
@@ -98,7 +98,7 @@ const Navigation = () => {
                     changeStateShow();
                   }}
                   className={`navigation__link ${
-                    location.pathname === path.MY_LISTINGS
+                    location.pathname === path.MY_BLOGS
                       ? "navigation__link--active"
                       : ""
                   }`}
@@ -110,7 +110,7 @@ const Navigation = () => {
           </div>
         </div>
         <div className="navigation__bottom">
-          <Link to="/sell-car">
+          <Link to="/add-new-blog">
             <Button
               onClick={() => {
                 setIsNavigationOpen(false);

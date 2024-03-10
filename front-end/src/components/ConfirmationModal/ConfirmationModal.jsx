@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { updateCarListings } from "../../redux/car-listing/carListing.reducers";
+import { updateBlogListings } from "../../redux/blog-listing/blogListing.reducers.js";
 import axios from "../../utils/axios";
-import { GreenButton, RedButton } from "../CarCard/CarCard.styels";
+import { GreenButton, RedButton } from "../BlogCard/BlogCard.styels";
 import Modal from "../Modal/Modal.jsx";
 
 const ConfirmationModal = ({
@@ -67,7 +67,7 @@ const ConfirmationModal = ({
                   }
                 );
                 console.log(response);
-                dispatch(updateCarListings(response.car));
+                dispatch(updateBlogListings(response.car));
               }}
             >
               Confirm Approval
@@ -86,7 +86,7 @@ const ConfirmationModal = ({
                   }
                 );
                 console.log(response);
-                dispatch(updateCarListings(response.car));
+                dispatch(updateBlogListings(response.car));
               }}
             >
               Confirm Rejection

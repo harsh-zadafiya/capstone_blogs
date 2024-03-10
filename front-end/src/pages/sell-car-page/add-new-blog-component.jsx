@@ -10,12 +10,12 @@ import "./sell-car-page.styles.scss";
 import StepOne from "./step-one/StepOne.component";
 import StepTwo from "./step-two/step-two.component";
 import StepThree from "./step-three/step-three.component";
-import { addCarDetails } from "../../redux/car-listing/carListing.reducers";
+import { addBlogDetails } from "../../redux/blog-listing/blogListing.reducers";
 import axios from "../../utils/axios";
-import { IconWrapper } from "../listing-details-page/listingDetailsPage.styles";
+import { IconWrapper } from "../blog-details-page/blogDetailsPage.styles";
 import { ReactComponent as BackArrow } from "../../assets/back-arrow.svg";
 
-const SellCarPage = ({ initialCarData = {}, action = "add" }) => {
+const AddNewBlog = ({ initialBlogData = {}, action = "add" }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const SellCarPage = ({ initialCarData = {}, action = "add" }) => {
 
   const initialUserData = tabs.reduce((initialState, tab) => {
     initialState[tab] =
-      Object.keys(initialCarData).length !== 0 ? initialCarData[tab] : {};
+      Object.keys(initialBlogData).length !== 0 ? initialBlogData[tab] : {};
     return initialState;
   }, {});
   const [userData, setUserData] = useState(initialUserData);
@@ -81,8 +81,8 @@ const SellCarPage = ({ initialCarData = {}, action = "add" }) => {
           console.log(response.data.car);
         }
 
-        dispatch(addCarDetails(response.data.car));
-        navigate(path.NEW_LISTINGS);
+        dispatch(addBlogDetails(response.data.car));
+        navigate(path.NEW_BLOGS);
         setSubmitForm(false);
       })();
     }
@@ -130,7 +130,7 @@ const SellCarPage = ({ initialCarData = {}, action = "add" }) => {
       <Tabs active={activeTab}>
         <div name="tabOne">
           {action === "update" ? (
-            <Link to={`${path.NEW_LISTINGS}/${initialCarData?.tabOne?.vin}`}>
+            <Link to={`${path.NEW_BLOGS}/${initialBlogData?.tabOne?.vin}`}>
               <IconWrapper>
                 <BackArrow />
               </IconWrapper>
@@ -165,4 +165,4 @@ const SellCarPage = ({ initialCarData = {}, action = "add" }) => {
   );
 };
 
-export default SellCarPage;
+export default AddNewBlog;

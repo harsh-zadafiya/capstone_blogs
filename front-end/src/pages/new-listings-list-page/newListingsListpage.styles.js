@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { ReactComponent as Vector } from "../../assets/listingsEmptyState.svg";
 
-export const CarListingsWrapper = styled.div`
+export const BlogListingsWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -48,7 +48,7 @@ export const Tab = styled.div`
         `}
 `;
 
-export const CarsList = styled.div`
+export const BlogsList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: max-content;

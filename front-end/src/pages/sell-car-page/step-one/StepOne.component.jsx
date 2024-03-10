@@ -8,12 +8,10 @@ import Dropdown from "../../../components/dropdown/dropdown.components";
 import Button from "../../../components/button/button.component";
 
 const emptyDataSet = {
-  carCompany: "",
-  carModel: "",
-  carMileage: "",
-  carEngine: "",
-  vin: "",
-  transmission: "",
+  blogTitle: "",
+  blogYear: "",
+  subTitle: "",
+  category: "",
 };
 
 const StepOne = ({
@@ -26,15 +24,13 @@ const StepOne = ({
   onBlur,
   action,
 }) => {
-  const { carCompany, carModel, carMileage, carEngine, vin, transmission } =
+  const { blogTitle, blogYear, subTitle, category } =
     formData;
   const {
-    carCompany: carCompanyError,
-    carModel: carModelError,
-    carMileage: carMileageError,
-    carEngine: carEngineError,
-    vin: vinError,
-    transmission: transmissionError,
+    blogTitle: blogTitleError,
+    blogYear: blogYearError,
+    subTitle: subTitleError,
+    category: categoryError,
   } = errorMessage;
 
   return (
@@ -44,8 +40,8 @@ const StepOne = ({
         type="text"
         id="carCompany"
         name="carCompany"
-        value={carCompany}
-        error={carCompanyError}
+        value={blogTitle}
+        error={blogTitleError}
         handleOnChange={handleOnChange}
         required
         onInvalid={onInvalid}
@@ -58,8 +54,8 @@ const StepOne = ({
         type="text"
         id="car-model"
         name="carModel"
-        value={carModel}
-        error={carModelError}
+        value={blogYear}
+        error={blogYearError}
         handleOnChange={handleOnChange}
         required
         onInvalid={onInvalid}
@@ -95,8 +91,8 @@ const StepOne = ({
         type="text"
         id="vin"
         name="vin"
-        value={vin}
-        error={vinError}
+        value={subTitle}
+        error={subTitleError}
         handleOnChange={handleOnChange}
         required
         onInvalid={onInvalid}
@@ -107,9 +103,9 @@ const StepOne = ({
         label="Category"
         name="transmission"
         id="transmission"
-        value={transmission}
+        value={category}
         onChange={handleOnChange}
-        error={transmissionError}
+        error={categoryError}
         required
         onInvalid={onInvalid}
         onBlur={onBlur}
