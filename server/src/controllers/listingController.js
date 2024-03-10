@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
     const uniqueFileName = `car-${req.body.blogTitle.replaceAll(
       " ",
       ""
-    )}-${req.body.carModel.replaceAll(" ", "")}-${Date.now()}.${extension}`;
+    )}-${req.body.blogYear.replaceAll(" ", "")}-${Date.now()}.${extension}`;
     cb(null, uniqueFileName);
   },
 });
@@ -36,7 +36,7 @@ const upload = multer({ storage });
 // Takes multiple files as input with "images" as the field name and stores it in the actual destination given above.
 exports.uploadCarImages = upload.array("images[]");
 
-exports.addSellCarRequest = async (req, res, next) => {
+exports.addBlogRequest = async (req, res, next) => {
   try {
     const user = req.user;
     const {
@@ -55,7 +55,7 @@ exports.addSellCarRequest = async (req, res, next) => {
       return `${config.SERVER_DOMAIN}/assets/images/cars/${req.body.subTitle}/${file.filename}`;
     });
 
-    const car = await Listing.create({
+    const blog = await Listing.create({
       blogTitle,
       blogYear,
       subTitle,
@@ -71,11 +71,11 @@ exports.addSellCarRequest = async (req, res, next) => {
 
     res.status(200).json({
       status: "Success",
-      car,
+      blog,
     });
   } catch (err) {
     fsExtra.removeSync(
-      p.join(__dirname, `../../public/assets/images/cars/${req.body.vin}`)
+      p.join(__dirname, `../../public/assets/images/cars/${req.body.subTitle}`)
     );
     return next(err);
   }
@@ -89,10 +89,10 @@ exports.getAllBlog = catchAsync(async (req, res, next) => {
   filter === "favorite" && (obj.favorite = true);
   filter === "my-listings" && (obj.userId = req.user._id);
 
-  const cars = await Listing.find(obj);
+  const blogs = await Listing.find(obj);
   res.status(201).json({
     status: "success",
-    cars,
+    blogs,
   });
 });
 
@@ -183,7 +183,7 @@ exports.updateFavorite = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateCarListing = catchAsync(async (req, res, next) => {
+exports.updateBlogListing = catchAsync(async (req, res, next) => {
   const { subTitle } = req.params;
   const {
     blogTitle,

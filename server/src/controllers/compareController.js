@@ -15,12 +15,11 @@ const getAllBlogs = async (req, res) => {
       Category: blog.category,
       Author: blog.authorName,
       Location: blog.location,
-      AuctionStatus: car.auctionStatus,
       BlogNotes: blog.blogNotes,
     }));
     res.status(200).json({
       status: "success",
-      cars: filteredData,
+      blogs: filteredData,
     });
   } catch (err) {
     console.error(err);

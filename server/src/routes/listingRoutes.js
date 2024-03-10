@@ -1,14 +1,14 @@
 const express = require("express");
 
 const {
-  addSellCarRequest,
+  addBlogRequest,
   uploadCarImages,
-  getAllCar,
-  getCarDetails,
-  deleteCarListing,
+  getAllBlog,
+  getBlogDetails,
+  deleteBlogListing,
   changeListingStatus,
   updateFavorite,
-  updateCarListing,
+  updateBlogListing,
 } = require("../controllers/listingController");
 const { listing } = require("../constants/listingConstants");
 
@@ -18,12 +18,12 @@ const router = express.Router();
 
 router.use(checkAuth);
 
-router.route("/").post(uploadCarImages, addSellCarRequest).get(getAllCar);
+router.route("/").post(uploadCarImages, addBlogRequest).get(getAllBlog);
 router
   .route("/:vin")
-  .get(getCarDetails)
-  .delete(deleteCarListing)
-  .put(updateCarListing);
+  .get(getBlogDetails)
+  .delete(deleteBlogListing)
+  .put(updateBlogListing);
 router.route("/approve/:vin").put(changeListingStatus(listing.status.APPROVED));
 router.route("/reject/:vin").put(changeListingStatus(listing.status.REJECTED));
 router.route("/favorite/:vin").post(updateFavorite);

@@ -7,7 +7,7 @@ const historySchema = mongoose.Schema({
         auto: true,
         default: () => { return "TH" + Date.now() }
     },
-    blogName: {
+    blogTitle: {
         type: String,
         required: true,
     },
@@ -17,10 +17,6 @@ const historySchema = mongoose.Schema({
     },
     blogYear: {
         type: String,
-        required: true,
-    },
-    carYear: {
-        type: Number,
         required: true,
     },
     category: {

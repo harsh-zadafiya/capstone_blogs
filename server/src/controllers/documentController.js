@@ -12,17 +12,17 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const path = p.join(
       __dirname,
-      `../../public/assets/documents/cars/${req.body.vin}`
+      `../../public/assets/documents/cars/${req.body.subTitle}`
     );
     fs.mkdirSync(path, { recursive: true });
-    cb(null, `public/assets/documents/cars/${req.body.vin}`);
+    cb(null, `public/assets/documents/cars/${req.body.subTitle}`);
   },
   filename: function (req, file, cb) {
     const extension = file.mimetype.split("/")[1];
-    const uniqueFileName = `document-${req.body.carCompany.replaceAll(
+    const uniqueFileName = `document-${req.body.blogTitle.replaceAll(
       " ",
       ""
-    )}-${req.body.vin.replaceAll(" ", "")}-${Date.now()}.${extension}`;
+    )}-${req.body.subTitle.replaceAll(" ", "")}-${Date.now()}.${extension}`;
     cb(null, uniqueFileName);
   },
 });
@@ -34,26 +34,26 @@ const upload = multer({ storage });
 exports.uploadCarDocuments = upload.array("documents[]");
 
 exports.saveDocumentsToDb = async (req, res, next) => {
-  const { vin } = req.body;
+  const { subTitle } = req.body;
 
   // req.files is set by multer after saving the file
   req.body.documents = req.files.map((doc) => {
-    return `${config.SERVER_DOMAIN}/assets/documents/cars/${vin}/${doc.filename}`;
+    return `${config.SERVER_DOMAIN}/assets/documents/cars/${subTitle}/${doc.filename}`;
   });
 
   try {
-    const car = await Listing.findOneAndUpdate(
-      { vin },
+    const blog = await Listing.findOneAndUpdate(
+      { subTitle },
       { $push: { documents: { $each: req.body.documents } } },
       { new: true }
     );
 
     if (!car) {
       fsExtra.removeSync(
-        p.join(__dirname, `../../public/assets/documents/cars/${req.body.vin}`)
+        p.join(__dirname, `../../public/assets/documents/cars/${req.body.subTitle}`)
       );
       return next(
-        new AppError("No Listing was found with the provided VIN", 400)
+        new AppError("No Listing was found with the provided SubTitle", 400)
       );
     }
 
@@ -63,18 +63,18 @@ exports.saveDocumentsToDb = async (req, res, next) => {
     });
   } catch (err) {
     fsExtra.removeSync(
-      p.join(__dirname, `../../public/assets/documents/cars/${req.body.vin}`)
+      p.join(__dirname, `../../public/assets/documents/cars/${req.body.subTitle}`)
     );
     return next(err);
   }
 };
 
 exports.downloadCarDocuments = (req, res, next) => {
-  const { vin } = req.params;
+  const { subTitle } = req.params;
 
   const dirPath = p.join(
     __dirname,
-    `../../public/assets/documents/cars/${vin}`
+    `../../public/assets/documents/cars/${subTitle}`
   );
 
   // zlib sets the degree of compression. 'archiver' library is used to zip multiple files into one.
