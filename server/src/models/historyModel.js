@@ -7,15 +7,15 @@ const historySchema = mongoose.Schema({
         auto: true,
         default: () => { return "TH" + Date.now() }
     },
-    carName: {
+    blogName: {
         type: String,
         required: true,
     },
-    carManufacturer: {
+    authorName: {
         type: String,
         required: true,
     },
-    carModel: {
+    blogYear: {
         type: String,
         required: true,
     },
@@ -23,9 +23,9 @@ const historySchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    transactionType: {
+    category: {
         type: String,
-        enum: ["buy", "sell"],
+        enum: ["food", "travelling"],
         required: true,
     },
     createdAt: {

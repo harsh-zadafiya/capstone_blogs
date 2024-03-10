@@ -1,26 +1,22 @@
-/*
-    : Utsavkumar Jayantibhai Italiya - ut437158@dal.ca (B00935447)
-*/
+
 const Listing = require("../models/listingModel");
 const catchAsync = require("../utils/catchAsync");
 
-const getAllCars = async (req, res) => {
+const getAllBlogs = async (req, res) => {
   try {
     const allData = await Listing.find();
-    const filteredData = allData.map((car) => ({
-      Image: car.images,
-      Brand: car.carCompany,
-      Model: car.carModel,
-      Mileage: car.carMileage,
-      Engine: car.carEngine,
-      vin: car.vin,
-      Transmission: car.transmission,
-      Seller: car.sellerName,
-      Location: car.location,
-      Highlight: car.highlight,
-      ServiceHistory: car.recentServiceHistory,
+    const filteredData = allData.map((blog) => ({
+      Image: blog.images,
+      Brand: blog.blogTitle,
+      Model: blog.blogYear,
+     
+    
+      SubTitle: blog.subTitle,
+      Category: blog.category,
+      Author: blog.authorName,
+      Location: blog.location,
       AuctionStatus: car.auctionStatus,
-      SellerNotes: car.sellerNotes,
+      BlogNotes: blog.blogNotes,
     }));
     res.status(200).json({
       status: "success",
@@ -33,5 +29,5 @@ const getAllCars = async (req, res) => {
 };
 
 module.exports = {
-  getAllCars,
+  getAllBlogs,
 };

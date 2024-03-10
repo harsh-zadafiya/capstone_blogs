@@ -15,14 +15,14 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const path = p.join(
       __dirname,
-      `../../public/assets/images/cars/${req.body.vin}`
+      `../../public/assets/images/cars/${req.body.subTitle}`
     );
     fs.mkdirSync(path, { recursive: true });
-    cb(null, `public/assets/images/cars/${req.body.vin}`);
+    cb(null, `public/assets/images/cars/${req.body.subTitle}`);
   },
   filename: function (req, file, cb) {
     const extension = file.mimetype.split("/")[1];
-    const uniqueFileName = `car-${req.body.carCompany.replaceAll(
+    const uniqueFileName = `car-${req.body.blogTitle.replaceAll(
       " ",
       ""
     )}-${req.body.carModel.replaceAll(" ", "")}-${Date.now()}.${extension}`;
@@ -40,36 +40,30 @@ exports.addSellCarRequest = async (req, res, next) => {
   try {
     const user = req.user;
     const {
-      carCompany,
-      carMileage,
-      carModel,
-      carEngine,
-      vin,
-      transmission,
-      sellerName,
+      blogTitle,
+      blogYear,
+      subTitle,
+      category,
+      authorName,
       location,
       highlight,
-      recentServiceHistory,
-      ownershipHistory,
+      blogDetails,
     } = req.body;
 
     // req.files is set by multer after saving the file
     req.body.images = req.files.map((file) => {
-      return `${config.SERVER_DOMAIN}/assets/images/cars/${req.body.vin}/${file.filename}`;
+      return `${config.SERVER_DOMAIN}/assets/images/cars/${req.body.subTitle}/${file.filename}`;
     });
 
     const car = await Listing.create({
-      carCompany,
-      carModel,
-      carMileage,
-      carEngine,
-      vin,
-      transmission,
-      sellerName,
+      blogTitle,
+      blogYear,
+      subTitle,
+      catgeory,
+      authorName,
       location,
       highlight,
-      ownershipHistory,
-      recentServiceHistory,
+      blogDetails,
       status: listing.status.UNDER_REVIEW,
       images: req.body.images,
       userId: user._id,
@@ -87,7 +81,7 @@ exports.addSellCarRequest = async (req, res, next) => {
   }
 };
 
-exports.getAllCar = catchAsync(async (req, res, next) => {
+exports.getAllBlog = catchAsync(async (req, res, next) => {
   const { filter } = req.query;
 
   let obj = {};
@@ -102,32 +96,32 @@ exports.getAllCar = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getCarDetails = catchAsync(async (req, res, next) => {
-  const { vin } = req.params;
+exports.getBlogDetails = catchAsync(async (req, res, next) => {
+  const { subTitle } = req.params;
 
-  const car = await Listing.findOne({ vin });
+  const blog = await Listing.findOne({ subTitle });
 
   res.status(200).json({
     status: "success",
-    car,
+    blog,
   });
 });
 
-exports.deleteCarListing = catchAsync(async (req, res, next) => {
-  const { vin } = req.params;
+exports.deleteBlogListing = catchAsync(async (req, res, next) => {
+  const { subTitle } = req.params;
   const loggedInUser = req.user;
-  let car;
+  let blog;
 
   if (loggedInUser.role === "admin") {
-    car = await Listing.findOneAndRemove({ vin });
+    blog = await Listing.findOneAndRemove({ subTitle });
   } else {
-    car = await Listing.findOneAndRemove({
-      vin,
+    blog = await Listing.findOneAndRemove({
+      subTitle,
       status: { $in: [listing.status.UNDER_REVIEW] },
     });
   }
 
-  if (!car)
+  if (!blog)
     return next(
       new AppError(
         `Either listing was not found OR you don't have permission to delete this listing.`
@@ -135,44 +129,44 @@ exports.deleteCarListing = catchAsync(async (req, res, next) => {
     );
 
   fsExtra.removeSync(
-    p.join(__dirname, `../../public/assets/images/cars/${vin}`)
+    p.join(__dirname, `../../public/assets/images/cars/${subTitle}`)
   );
   fsExtra.removeSync(
-    p.join(__dirname, `../../public/assets/documents/cars/${vin}`)
+    p.join(__dirname, `../../public/assets/documents/cars/${subTitle}`)
   );
   res.status(200).json({
     status: "success",
-    car,
+    blog,
   });
 });
 
 exports.changeListingStatus = (status) => {
   return catchAsync(async (req, res, next) => {
-    const { vin } = req.params;
+    const { subTitle } = req.params;
 
-    const car = await Listing.findOneAndUpdate(
-      { vin },
+    const blog = await Listing.findOneAndUpdate(
+      { subTitle },
       { status },
       {
         new: true,
       }
     );
 
-    if (!car) return next(new AppError(`No Listing found with vin : ${vin}`));
+    if (!blog) return next(new AppError(`No Listing found with vin : ${subTitle}`));
 
     res.status(200).json({
       status: "success",
-      car,
+      blog,
     });
   });
 };
 
 exports.updateFavorite = catchAsync(async (req, res, next) => {
-  const { vin } = req.params;
+  const { subTitle } = req.params;
   const { favorite } = req.body;
 
-  const car = await Listing.findOneAndUpdate(
-    { vin },
+  const blog = await Listing.findOneAndUpdate(
+    { subTitle },
     {
       favorite,
     },
@@ -181,53 +175,46 @@ exports.updateFavorite = catchAsync(async (req, res, next) => {
     }
   );
 
-  if (!car) return next(new AppError(`No Listing found with vin : ${vin}`));
+  if (!blog) return next(new AppError(`No Listing found with vin : ${subTitle}`));
 
   res.status(200).json({
     status: "success",
-    car,
+    blog,
   });
 });
 
 exports.updateCarListing = catchAsync(async (req, res, next) => {
-  const { vin } = req.params;
+  const { subTitle } = req.params;
   const {
-    carCompany,
-    carModel,
-    carMileage,
-    carEngine,
-    transmission,
+    blogTitle,
+    blogYear,
+    category,
     location,
-    highlight,
-    recentServiceHistory,
-    sellerNotes,
-    sellerName,
-    ownershipHistory,
+    blogNotes,
+    authorName,
+    blogDetails,
   } = req.body;
 
-  const car = await Listing.findOneAndUpdate(
-    { vin },
+  const blog = await Listing.findOneAndUpdate(
+    { subTitle },
     {
-      carCompany,
-      carModel,
-      carMileage,
+      blogTitle,
+      blogYear,
       location,
-      carEngine,
-      transmission,
+      category,
       highlight,
-      ownershipHistory,
-      recentServiceHistory,
-      sellerNotes,
-      sellerName,
+      blogDetails,
+      blogNotes,
+      authorName,
     }
   );
 
-  if (!car) {
-    return next(new AppError("No listing was found with the given VIN", 400));
+  if (!blog) {
+    return next(new AppError("No listing was found with the given SubTitle", 400));
   }
 
   res.status(200).json({
     status: "success",
-    car,
+    blog,
   });
 });

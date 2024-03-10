@@ -4,63 +4,44 @@ const config = require("../config");
 const { listing } = require("../constants/listingConstants");
 
 const listingSchema = new mongoose.Schema({
-  carCompany: {
+  blogTitle: {
     type: String,
-    required: [true, "Car must belong to a company"],
+    required: [true, "Blog should have a title"],
   },
-  carModel: {
+  blogYear: {
     type: String,
-    required: [true, "Car must have a model"],
+    required: [true, "Blog should have a start year"],
   },
-  // carMileage: {
-  //     type: Number,
-  //     required: [true, "Mileage is required."],
-  //     min: 0,
-  // },
-  // carEngine: {
-  //     type: String,
-  //     required: [true, "Car must have an engine. Please enter a value."],
-  // },
-  vin: {
+  subTitle: {
     type: String,
-    unique: true,
+    // unique: true,
     required: [
       true,
-      "We can't proceed further without getting Vehicle Indentification Number.",
+      "Every blog has it's subtitle.",
     ],
   },
-  transmission: {
+  category: {
     type: String,
     enum: ["food", "travelling"],
     required: [
       true,
-      "Car must have either food or travelling transmission. Please enter a value.",
+      "Every blog is categorised into few types.",
     ],
   },
-  sellerName: {
+  authorName: {
     type: String,
-    required: [true, "Seller Name is required."],
+    required: [true, "Author Name is must."],
   },
   location: {
     type: String,
     required: [true, "Location can't be empty. Please enter a value."],
   },
-  //   highlight: {
-  //     type: String,
-  //     required: [true, "You must type something about your car"],
-  //     maxLength: 2100,
-  //   },
-  //   recentServiceHistory: {
-  //     type: String,
-  //     required: [true, "Recent Service History is required."],
-  //     maxLength: 2100,
-  //   },
-  ownershipHistory: {
+  blogDetails: {
     type: String,
-    required: [true, "Ownership History is required."],
+    required: [true, "Blog Details is mandatory."],
     maxLength: 2100,
   },
-  sellerNotes: {
+  blogNotes: {
     type: String,
     maxLength: 2100,
   },
