@@ -5,7 +5,7 @@ import axios from "../../utils/axios";
 import AddNewBlogPage from "../sell-car-page/add-new-blog-component";
 
 const EditBlogDetailsPage = () => {
-  const { vin } = useParams();
+  const { subTitle } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +14,7 @@ const EditBlogDetailsPage = () => {
       setLoading(true);
       const {
         data: { blog },
-      } = await axios.get(`/listing/${vin}`, {
+      } = await axios.get(`/listing/${subTitle}`, {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -26,7 +26,7 @@ const EditBlogDetailsPage = () => {
           blogModel: blog.blogModel,
           blogMileage: blog.blogMileage,
           carEngine: blog.blogEngine,
-          vin: blog.vin,
+          subTitle: blog.subTitle,
           transmission: blog.transmission,
         },
         tabTwo: {
@@ -41,7 +41,7 @@ const EditBlogDetailsPage = () => {
 
       setLoading(false);
     })();
-  }, [vin]);
+  }, [subTitle]);
   console.log(data);
 
   return loading ? (

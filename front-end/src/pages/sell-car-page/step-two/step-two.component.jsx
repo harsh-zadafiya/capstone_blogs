@@ -9,7 +9,6 @@ import Button from "../../../components/button/button.component";
 const emptyDataSet = {
   authorName: "",
   location: "",
-  highlight: "",
   blogDetails: "",
   blogNotes: "",
 };
@@ -32,7 +31,6 @@ const StepTwo = ({
   const {
     authorName: authorNameError,
     location: locationError,
-    highlight: highlightError,
     blogDetails: blogDetailsError,
     blogNotes: blogNotesError,
   } = errorMessage;
@@ -42,8 +40,8 @@ const StepTwo = ({
       <InputField
         label=" Author Name"
         type="text"
-        id="sellerName"
-        name="sellerName"
+        id="authorName"
+        name="authorName"
         value={authorName}
         error={authorNameError}
         handleOnChange={handleOnChange}
@@ -67,36 +65,10 @@ const StepTwo = ({
         pattern="^[a-zA-Z\s]*$"
         title="Please enter only letters"
       />
-      {/* <TextArea
-        id="highlights"
-        name="highlight"
-        rows="6"
-        value={highlight}
-        label="Highlight"
-        onChange={handleOnChange}
-        error={highlightError}
-        required
-        maxLength={1800}
-        onInvalid={onInvalid}
-        onBlur={onBlur}
-      />
-      <TextArea
-        label="Recent Service History"
-        id="recentServiceHistory"
-        name="recentServiceHistory"
-        rows="6"
-        value={recentServiceHistory}
-        error={recentServiceHistoryError}
-        onChange={handleOnChange}
-        required
-        maxLength={1800}
-        onInvalid={onInvalid}
-        onBlur={onBlur}
-      /> */}
       <TextArea
         label="Details of Blog"
-        id="ownershipHistory"
-        name="ownershipHistory"
+        id="blogDetails"
+        name="blogDetails"
         rows="6"
         value={blogDetails}
         error={blogDetailsError}
@@ -108,9 +80,8 @@ const StepTwo = ({
       />
       <TextArea
         label="Blog Notes"
-        id="sellerNotes"
-        name="sellerNotes"
-        
+        id="blogNotes"
+        name="blogNotes"
         rows="6"
         value={blogNotes}
         error={blogNotesError}

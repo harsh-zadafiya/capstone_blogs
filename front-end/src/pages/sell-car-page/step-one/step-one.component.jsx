@@ -50,8 +50,8 @@ const StepOne = ({ switchTab, initialData, action }) => {
       <InputField
         label="Car Company"
         type="text"
-        id="carCompany"
-        name="carCompany"
+        id="blogTitle"
+        name="blogTitle"
         value={blogTitle}
         error={blogTitleError}
         handleOnChange={handleOnChange}
@@ -60,8 +60,8 @@ const StepOne = ({ switchTab, initialData, action }) => {
       <InputField
         label="Car Model"
         type="text"
-        id="car-model"
-        name="carModel"
+        id="blogYear"
+        name="blogYear"
         value={blogYear}
         error={blogYearError}
         handleOnChange={handleOnChange}
@@ -71,8 +71,8 @@ const StepOne = ({ switchTab, initialData, action }) => {
         disabled={action !== "update"}
         label="Vehicle Identification Number (VIN)"
         type="text"
-        id="vin"
-        name="vin"
+        id="subTitle"
+        name="subTitle"
         value={subTitle}
         error={subTitleError}
         handleOnChange={handleOnChange}
