@@ -13,6 +13,7 @@ import {
   LoginPage,
   RegistrationPage,
   ForgotPage,
+  ManageProfile,
   ComparePage,
   NewListingsListPage,
   NewListingDetailsPage,
@@ -90,6 +91,15 @@ function App() {
                   path={path.UPDATE_PROFILE}
                   exact
                   element={<UpdateProfilePage />}
+                />
+                <Route
+                  path={path.MANAGE_PROFILE}
+                  exact
+                  element={
+                    <div>
+                      <ManageProfile />
+                    </div>
+                  }
                 />
 
                 <Route

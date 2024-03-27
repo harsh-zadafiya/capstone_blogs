@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./login-page.styles.scss";
 import { useDispatch } from "react-redux";
@@ -21,32 +20,37 @@ function LoginPage() {
     var emailNotFound = true;
 
     try {
-      await axios({
-        method: "post",
-        url: "http://localhost:8000/user/login",
-        data: {
-          email: uname.value,
-          password: pass.value,
-        },
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => {
-          if (res.data.status) {
-            emailNotFound = false;
-            localStorage.setItem("token", res.data.token);
-            dispatch(submitted());
-            dispatch(setLoginUser(res.data.user));
-            navigate(path.HOME);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const response = await axios.post("http://localhost:8000/user/login", {
+        email: uname.value,
+        password: pass.value,
+      });
+
+      if (response.data.status) {
+        const { user, token } = response.data;
+        if (user.isBlocked) {
+          alert("Your account is blocked. Please contact support.");
+          return; // Exit the function early
+        } else {
+          emailNotFound = false;
+          localStorage.setItem("token", token);
+          dispatch(submitted());
+          dispatch(setLoginUser(user));
+          navigate(path.HOME);
+        }
+      }
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        if (error.response.status === 401) {
+          alert("Invalid credentials. Please try again.");
+        }
+      } else if (error.request) {
+        alert("Network error. Please check your internet connection.");
+      } else {
+        console.error("Error logging in:", error.message);
+        alert("An unexpected error occurred. Please try again later.");
+      }
     }
+
     if (emailNotFound) {
       alert("Please enter valid credentials.");
     }
