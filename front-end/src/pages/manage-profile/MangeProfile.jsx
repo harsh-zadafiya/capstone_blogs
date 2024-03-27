@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { RedButton } from "../../components/CarCard/CarCard.styels";
+import {
+  GreenButton,
+  RedButton,
+} from "../../components/CarCard/CarCard.styels";
 import Modal from "../../components/Modal/Modal.jsx";
 
 const ManageProfile = () => {
@@ -71,10 +74,10 @@ const ManageProfile = () => {
                   <td>{user.email}</td>
                   <td>
                     {!user.isBlocked ? (
-                      <RedButton onClick={() => openModal(user._id)}>
+                      <GreenButton onClick={() => openModal(user._id)}>
                         {" "}
                         Action
-                      </RedButton>
+                      </GreenButton>
                     ) : (
                       <RedButton>Blocked</RedButton>
                     )}
