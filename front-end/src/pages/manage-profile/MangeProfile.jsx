@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  GreenButton,
-  RedButton,
-} from "../../components/CarCard/CarCard.styels";
+
 import Modal from "../../components/Modal/Modal.jsx";
 
 const ManageProfile = () => {
@@ -53,40 +50,40 @@ const ManageProfile = () => {
   return (
     <>
       <div>
-        <h1>Profile</h1>
+        <h1>Profiles</h1>
         <hr />
-        <h2>Account</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allUser.map((user) =>
-              user.role !== "admin" ? (
-                <tr key={user._id}>
-                  <td>{user.firstName}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    {!user.isBlocked ? (
-                      <GreenButton onClick={() => openModal(user._id)}>
-                        {" "}
-                        Action
-                      </GreenButton>
-                    ) : (
-                      <RedButton>Blocked</RedButton>
-                    )}
-                  </td>
-                </tr>
-              ) : null
-            )}
-          </tbody>
-        </table>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeaderCell>First Name</TableHeaderCell>
+                <TableHeaderCell>Last Name</TableHeaderCell>
+                <TableHeaderCell>Email</TableHeaderCell>
+                <TableHeaderCell>Action</TableHeaderCell>
+              </TableRow>
+            </TableHead>
+            <tbody>
+              {allUser.map((user) =>
+                user.role !== "admin" ? (
+                  <TableRow key={user._id}>
+                    <TableCell>{user.firstName}</TableCell>
+                    <TableCell>{user.lastName}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>
+                      {!user.isBlocked ? (
+                        <GreenButton onClick={() => openModal(user._id)}>
+                          Action
+                        </GreenButton>
+                      ) : (
+                        <RedButton>Blocked</RedButton>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ) : null
+              )}
+            </tbody>
+          </Table>
+        </TableContainer>
       </div>
 
       <Modal
@@ -128,4 +125,50 @@ export const PaymentMethod = styled.button`
   :hover {
     background-color: #00c3ff;
   }
+`;
+
+const TableContainer = styled.div`
+  overflow-x: auto;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+const TableHead = styled.thead`
+  background-color: #f2f2f2;
+`;
+
+const TableRow = styled.tr`
+  &:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+`;
+
+const TableHeaderCell = styled.th`
+  padding: 12px 15px;
+  text-align: left;
+`;
+
+const TableCell = styled.td`
+  padding: 12px 15px;
+`;
+
+const GreenButton = styled.button`
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const RedButton = styled.button`
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: not-allowed;
 `;
