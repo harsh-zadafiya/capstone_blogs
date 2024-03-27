@@ -8,6 +8,7 @@ const path = {
   LOGIN: "/",
   REGISTRATION: "/signup",
   FORGOT: "/forgot",
+  COMPARE_CARS: "/search-blogs",
   UPDATE_PROFILE: "/updateprofile",
 };
 

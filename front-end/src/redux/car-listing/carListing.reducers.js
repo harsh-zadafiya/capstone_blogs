@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 };
 
 const carListingSlice = createSlice({
-  name: "carListing",
+  name: "blogListing",
   initialState: INITIAL_STATE,
   reducers: {
     addCarDetails(state, { payload }) {

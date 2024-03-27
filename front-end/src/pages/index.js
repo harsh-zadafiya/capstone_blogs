@@ -10,3 +10,4 @@ export { default as ManageProfile } from "./manage-profile/MangeProfile";
 
 export { default as UpdateProfilePage } from "./update-profile-page/update-profile.component";
 export { default as NotFoundPage } from "./not-found-page/not-found.component";
+export { default as ComparePage } from "./compare-cars/compare-cars.component";

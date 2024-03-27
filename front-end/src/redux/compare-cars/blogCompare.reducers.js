@@ -5,29 +5,29 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
   cars: [],
-  compareCars: [],
+  compareBlogs: [],
 };
 
 const carCompareSlice = createSlice({
-  name: "carCompare",
+  name: "blogCompare",
   initialState: INITIAL_STATE,
   reducers: {
-    fetchCarList(state, { payload }) {
+    fetchBlogList(state, { payload }) {
       state.cars = payload;
     },
     addCompareCar(state, action) {
-      if (state.compareCars.length >= 2) {
+      if (state.compareBlogs.length >= 2) {
         state.compareCars = [];
       }
-      state.compareCars.push(action.payload);
+      state.compareBlogs.push(action.payload);
     },
     removeCompareCar(state, action) {
-      state.compareCars.splice(state.compareCars.indexOf(action.payload), 1);
+      state.compareBlogs.splice(state.compareBlogs.indexOf(action.payload), 1);
     },
   },
 });
 
-export const { addCompareCar, removeCompareCar, fetchCarList } =
+export const { addCompareCar, removeCompareCar, fetchBlogList } =
   carCompareSlice.actions;
 
 export default carCompareSlice.reducer;

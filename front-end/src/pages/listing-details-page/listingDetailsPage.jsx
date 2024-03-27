@@ -71,7 +71,7 @@ const ListingDetailsPage = () => {
   const [documents, setDocuments] = useState([]);
 
   const { vin } = useParams();
-  const car = useSelector((state) => state.carListing.cars).find(
+  const car = useSelector((state) => state.blogListing.cars).find(
     (car) => car.vin === vin
   );
 
@@ -267,7 +267,7 @@ const ListingDetailsPage = () => {
           <CarImages>
             {car.images.map((image, i) => {
               if (i <= 7) {
-                return <Image src={image} alt="Car Image" key={image} />;
+                return <Image src={image} alt="Blog Image" key={image} />;
               } else {
                 return <></>;
               }
