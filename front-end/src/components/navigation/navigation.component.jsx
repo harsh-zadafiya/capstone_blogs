@@ -6,7 +6,7 @@ import path from "../../constants/paths";
 import Logo from "../logo/logo.component";
 import "./navigation.styles.scss";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "../Modal/Modal.jsx";
 import { notSubmitted, setNullUser } from "../../redux/isLogin.reducers";
 import { RedButton } from "../CarCard/CarCard.styels";
@@ -17,6 +17,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isShow, setIsShow] = useState(false);
+  const user = useSelector((state) => state.loginStatus.userInfo);
 
   const closeNavigation = () => {
     setIsNavigationOpen(false);
@@ -77,7 +78,6 @@ const Navigation = () => {
             </div>
 
             <div className="navigation__links--auction">
-              <h4 className="auction__title">Settings</h4>
               <div className="auction__links">
                 <Link
                   to={path.PROFILE}
@@ -90,6 +90,21 @@ const Navigation = () => {
                 >
                   Profile
                 </Link>
+                {user.role === "admin" ? (
+                  <Link
+                    to={path.MANAGE_PROFILE}
+                    onClick={closeNavigation}
+                    className={`navigation__link ${
+                      location.pathname === path.MANAGE_PROFILE
+                        ? "navigation__link--active"
+                        : ""
+                    }`}
+                  >
+                    Manage Profiles
+                  </Link>
+                ) : (
+                  ""
+                )}
 
                 <Link
                   to={path.LOGIN}

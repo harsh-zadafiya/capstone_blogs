@@ -7,6 +7,7 @@ require("dotenv").config();
 var bodyParser = require("body-parser");
 
 const historyRouter = require("./routes/historyRoutes");
+const userRouter = require("./routes/userRouter");
 
 const listingRouter = require("./routes/listingRoutes");
 const userRoter = require("./routes/userRouter");
@@ -45,7 +46,8 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use("/listing", listingRouter);
-app.use("/user", userRoter);
+app.use("/user", userRouter);
+// app.use("/user", userRoter);
 app.use("/document", documentRouter);
 app.use("/user/history/", historyRouter);
 app.use("/comparecar", compareRouter);

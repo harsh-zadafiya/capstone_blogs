@@ -30,6 +30,10 @@ const userSchema = mongoose.Schema({
     enum: ["admin", "user"],
     default: "user",
   },
+  isBlocked: {
+    type: Boolean,
+    default: false,
+  },
   paymentMethods: [
     {
       type: mongoose.Schema.Types.ObjectId,

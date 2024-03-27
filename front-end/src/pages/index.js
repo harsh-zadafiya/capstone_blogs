@@ -6,6 +6,7 @@ export { default as RegistrationPage } from "./registration-page/registration-pa
 export { default as ForgotPage } from "./forgot-page/forgot-page.component";
 export { default as NewListingsListPage } from "./new-listings-list-page/newListingsListPage";
 export { default as NewListingDetailsPage } from "./listing-details-page/listingDetailsPage";
+export { default as ManageProfile } from "./manage-profile/MangeProfile";
 
 export { default as UpdateProfilePage } from "./update-profile-page/update-profile.component";
 export { default as NotFoundPage } from "./not-found-page/not-found.component";

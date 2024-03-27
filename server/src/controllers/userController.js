@@ -5,6 +5,44 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      status: true,
+      users: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: "Error retrieving users",
+    });
+  }
+};
+
+const toggleIsBlocked = async (req, res, next) => {
+  const userId = req.params.userId;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Toggle isBlocked field
+    user.isBlocked = !user.isBlocked;
+    await user.save();
+
+    res
+      .status(200)
+      .json({ message: "isBlocked field toggled successfully", user });
+  } catch (error) {
+    console.error("Error toggling isBlocked field:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // Middleware for authentication.
 const checkAuth = async (req, res, next) => {
   const token = req.headers["x-access-token"];
@@ -50,6 +88,7 @@ const createNewUser = (req, res, next) => {
         email,
         password: newPassword,
         role: "user",
+        isBlocked: false,
       });
       console.log("#### NEW USER ###");
       console.log(newUser);
@@ -85,7 +124,6 @@ const validateUser = (req, res, next) => {
   const checkUser = async () => {
     try {
       const findUser = await User.findOne({ email: email }).select("+password");
-
       if (!findUser) {
         return res.status(404).json({
           status: false,
@@ -113,7 +151,7 @@ const validateUser = (req, res, next) => {
       } else {
         res.status(404).json({
           status: false,
-          message: "password is invalide.",
+          message: "password is invalid.",
         });
       }
     } catch (error) {
@@ -278,6 +316,8 @@ module.exports = {
   validateUser,
   forgotpassword,
   checkAuth,
+  getAllUsers,
+  toggleIsBlocked,
   getprofile,
   updateProfile,
   checkUser,
