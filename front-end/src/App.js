@@ -13,6 +13,7 @@ import {
   LoginPage,
   RegistrationPage,
   ForgotPage,
+  ComparePage,
   NewListingsListPage,
   NewListingDetailsPage,
   UpdateProfilePage,
@@ -78,6 +79,11 @@ function App() {
                     element={<NewListingDetailsPage />}
                   />
                 </Route>
+                <Route
+                    path={path.COMPARE_CARS}
+                    exact
+                    element={<ComparePage />}
+                  />
 
                 <Route path={path.PROFILE} exact element={<ProfilePage />} />
                 <Route

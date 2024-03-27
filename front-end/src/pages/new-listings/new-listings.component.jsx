@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 const NewListingsPage = () => {
-  const cars = useSelector((state) => state.carListing.cars);
+  const cars = useSelector((state) => state.blogListing.cars);
   console.log(cars);
   return <Outlet />;
 };
