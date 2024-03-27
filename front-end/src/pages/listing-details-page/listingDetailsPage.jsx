@@ -6,6 +6,7 @@ import { ReactComponent as MileageIcon } from "../../assets/mileage.svg";
 import { ReactComponent as LocationIcon } from "../../assets/location.svg";
 import { ReactComponent as EngineIcon } from "../../assets/engine.svg";
 import { ReactComponent as TransmissionIcon } from "../../assets/transmission.svg";
+import CommentComponent from "../../components/comments/CommentComponent.js";
 
 import path from "../../constants/paths";
 
@@ -451,6 +452,7 @@ const ListingDetailsPage = () => {
             <DescriptionGroup>
               <DescriptionHeading>Comments</DescriptionHeading>
               <Text>{recentServiceHistory}</Text>
+              <CommentComponent />
             </DescriptionGroup>
             {sellerNotes ? (
               <DescriptionGroup>
