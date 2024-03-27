@@ -24,7 +24,7 @@ const tabNames = {
 const NewListingsListPage = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState(tabNames.ALL);
-  const cars = useSelector((state) => state.carListing.cars);
+  const cars = useSelector((state) => state.blogListing.cars);
   const dispatch = useDispatch();
 
   const fetchCarListings = useCallback(

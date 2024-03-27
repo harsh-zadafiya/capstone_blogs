@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import Stripe from "../../assets/stripe.png";
+import PaymentModal from "../payment-modal/PaymentModal";
 import { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -155,13 +156,19 @@ const ProfilePage = () => {
         </AccountRow>
 
         <Divider />
+        <SemiTitle>Payment</SemiTitle>
 
-        {/* <RowContainer>
+<PaymentMethod onClick={toggleModal}>Payment Method</PaymentMethod>
+
+        <RowContainer>
           <SmallText style={{ color: "gray", fontSize: "14px" }}>
             Powered by
           </SmallText>
           <StripeLogo src={Stripe} />
-        </RowContainer> */}
+        </RowContainer>
+        <Elements stripe={stripePromise}>
+          <PaymentModal isOpen={isOpen} toggleModal={toggleModal} />
+        </Elements>
       </ProfilePageWrapper>
     </>
   );

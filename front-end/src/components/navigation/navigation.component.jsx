@@ -74,6 +74,17 @@ const Navigation = () => {
               >
                 New Blogs
               </Link>
+              <Link
+                to={path.COMPARE_CARS}
+                onClick={closeNavigation}
+                className={`navigation__link ${
+                  location.pathname === path.COMPARE_CARS
+                    ? "navigation__link--active"
+                    : ""
+                }`}
+              >
+                Search Blogs
+              </Link>
             </div>
 
             <div className="navigation__links--auction">
