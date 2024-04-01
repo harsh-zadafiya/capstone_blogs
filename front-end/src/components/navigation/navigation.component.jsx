@@ -117,6 +117,18 @@ const Navigation = () => {
                   ""
                 )}
 
+              <Link
+                to={path.SUBSCRIPTION}
+                onClick={closeNavigation}
+                className={`navigation__link ${
+                  location.pathname === path.SUBSCRIPTION
+                    ? "navigation__link--active"
+                    : ""
+                }`}
+              >
+                Subscription
+              </Link>
+
                 <Link
                   to={path.LOGIN}
                   onClick={() => {

@@ -10,6 +10,7 @@ const path = {
   FORGOT: "/forgot",
   COMPARE_CARS: "/search-blogs",
   UPDATE_PROFILE: "/updateprofile",
+  SUBSCRIPTION: "/subscription-plans",
 };
 
 export default path;
