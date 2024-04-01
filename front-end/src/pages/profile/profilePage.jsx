@@ -156,22 +156,6 @@ const ProfilePage = () => {
         </AccountRow>
 
         <Divider />
-        <SemiTitle>Payment</SemiTitle>
-
-{/* <PaymentMethod onClick={toggleModal}>Payment Method</PaymentMethod> */}
-<a href="https://buy.stripe.com/test_fZe6rUe5gayr46Y5kk" onClick={toggleModal}>
-  <PaymentMethod />
-</a>
-
-        <RowContainer>
-          <SmallText style={{ color: "gray", fontSize: "14px" }}>
-            Powered by
-          </SmallText>
-          <StripeLogo src={Stripe} />
-        </RowContainer>
-        <Elements stripe={stripePromise}>
-          <PaymentModal isOpen={isOpen} toggleModal={toggleModal} />
-        </Elements>
       </ProfilePageWrapper>
     </>
   );
