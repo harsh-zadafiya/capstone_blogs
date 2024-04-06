@@ -12,3 +12,4 @@ export { default as UpdateProfilePage } from "./update-profile-page/update-profi
 export { default as NotFoundPage } from "./not-found-page/not-found.component";
 export { default as ComparePage } from "./compare-cars/compare-cars.component";
 export { default as Subscription } from "./subscription-page/Subscription";
+export {default as ConfirmationPage} from "./success-action/ConfirmationPage";

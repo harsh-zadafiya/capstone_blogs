@@ -19,7 +19,8 @@ import {
   NewListingDetailsPage,
   UpdateProfilePage,
   NotFoundPage,
-  Subscription
+  Subscription,
+  ConfirmationPage
 } from "./pages";
 import EditCarDetailsPage from "./pages/EditCarDetails/EditCarDetails.jsx";
 import React, { useEffect } from "react";
@@ -71,6 +72,7 @@ function App() {
                 <Route path={path.HOME} exact element={<HomePage />} />
                 <Route path={path.SELL_CAR} element={<SellCarPage />} />
                 <Route path={path.SUBSCRIPTION} element={<Subscription />} />
+                <Route path={path.CONFIRMATION} element={<ConfirmationPage />} />
 
                 <Route path={path.NEW_LISTINGS} element={<NewListingsPage />}>
                   <Route

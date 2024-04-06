@@ -56,3 +56,94 @@ app.use(globalErrorHandlerMiddleware);
 app.listen(PORT, () => {
   console.log(`Canada 4 U server is running on port: ${PORT}`);
 });
+
+
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
+
+const quantity = 1
+const SUCCESS_URL = "http://localhost:3000/confirmation-page"
+const CANCEL_URL = "http://localhost:3000/subscription-plans"
+app.post("/create-checkout-basic-session", async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      success_url: SUCCESS_URL,
+      cancel_url: CANCEL_URL,
+      line_items: [
+        {
+          price: process.env.STRIPE_BASIC_PRICE_API_ID,
+          quantity: quantity,
+        },
+      ],
+      mode: 'subscription',
+    });
+    console.log("session: ", session.id, session.url, session)
+
+    // get id, save to user, return url
+    const sessionId = session.id;
+    console.log("sessionId: ", sessionId);
+
+    // save session.id to the user in your database
+
+    res.json({ url: session.url })
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+})
+
+
+
+app.post("/create-checkout-pro-session", async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      success_url: SUCCESS_URL,
+      cancel_url: CANCEL_URL,
+      line_items: [
+        {
+          price: process.env.STRIPE_PRO_PRICE_API_ID,
+          quantity: quantity,
+        },
+      ],
+      mode: 'subscription',
+    });
+    console.log("session: ", session.id, session.url, session)
+
+    // get id, save to user, return url
+    const sessionId = session.id;
+    console.log("sessionId: ", sessionId);
+
+    // save session.id to the user in your database
+
+    res.json({ url: session.url })
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+})
+
+
+
+app.post("/create-checkout-premium-session", async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      success_url: SUCCESS_URL,
+      cancel_url: CANCEL_URL,
+      line_items: [
+        {
+          price: process.env.STRIPE_PREMIUM_PRICE_API_ID,
+          quantity: quantity,
+        },
+      ],
+      mode: 'subscription',
+    });
+    console.log("session: ", session.id, session.url, session)
+
+    // get id, save to user, return url
+    const sessionId = session.id;
+    console.log("sessionId: ", sessionId);
+
+    // save session.id to the user in your database
+
+    res.json({ url: session.url })
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+})

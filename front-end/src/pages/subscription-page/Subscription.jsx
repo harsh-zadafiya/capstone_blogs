@@ -4,38 +4,54 @@ import basic from "../../assets/basic.svg";
 import pro from "../../assets/pro.svg";
 import premium from "../../assets/premium.svg";
 
+// Subscription data array
 const data = [
   {
     id: 1,
     src: basic,
-    title: "Basic",
+    title: "Quarterly",
     price: "10",
     description: "Basic subscription includes essential features for beginners.",
-    link: "https://buy.stripe.com/test_fZe6rUe5gayr46Y5kk"
+    subscriptionFunction: "create-checkout-basic-session"
   },
   {
     id: 2,
     src: pro,
-    title: "Pro",
+    title: "Half-Yearly",
     price: "20",
-    description: "Pro subscription offers very advanced features for a set of professionals.",
-    link: "https://buy.stripe.com/test_9AQ9E6f9k7mfbzq145"
+    description: "Pro subscription offers very advanced features for professionals.",
+    subscriptionFunction: "create-checkout-pro-session"
   },
   {
     id: 3,
     src: premium,
-    title: "Premium",
+    title: "Annually",
     price: "35",
     description: "Premium subscription provides top-tier features for businesses.",
-    link: "https://buy.stripe.com/test_4gwdUmgdobCvbzq9AC"
+    subscriptionFunction: "create-checkout-premium-session"
   },
 ];
 
+// Reusable function to create checkout session
+const createCheckoutSession = async (sessionEndpoint) => {
+  try {
+    const response = await fetch(`http://localhost:3000/${sessionEndpoint}`, {
+      method: "POST"
+    });
+    const { url } = await response.json();
+    window.location = url;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Subscription component
 const Subscription = () => {
   const [planType, setPlanType] = useState("");
 
-  const checkout = (link) => {
-    window.location.href = link;
+  const checkout = (sessionEndpoint) => {
+    createCheckoutSession(sessionEndpoint); // Invoke the createCheckoutSession function
+    setPlanType(""); // Reset planType (if needed)
   };
 
   return (
@@ -43,15 +59,15 @@ const Subscription = () => {
       <Header>Services</Header>
       <Container>
         <SubscriptionOptions>
-          {data.map((item, idx) => (
-            <OptionContainer key={idx} selected={planType === item.title.toLowerCase()}>
+          {data.map((item) => (
+            <OptionContainer key={item.id} selected={planType === item.title.toLowerCase()}>
               <ImageContainer>
                 <img src={item.src} alt={item.title} />
               </ImageContainer>
               <Title>{item.title}</Title>
               <Description>{item.description}</Description>
               <Price>${item.price}</Price>
-              <Button onClick={() => checkout(item.link)}>
+              <Button onClick={() => checkout(item.subscriptionFunction)}>
                 {planType === item.title.toLowerCase() ? "Subscribed" : "Subscribe Now"}
               </Button>
             </OptionContainer>
@@ -61,6 +77,7 @@ const Subscription = () => {
     </>
   );
 };
+
 
 const Container = styled.div`
   display: flex;
