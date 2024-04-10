@@ -1,4 +1,5 @@
 const Listing = require("../models/listingModel");
+const Comment = require("../models/commentModel");
 const multer = require("multer");
 const fs = require("fs");
 const p = require("path");
@@ -10,7 +11,6 @@ const catchAsync = require("../utils/catchAsync");
 const { listing } = require("../constants/listingConstants");
 const AppError = require("../utils/appError");
 
-// Below code configures the multer destination and filename. Destination gives multer the directory to save the files in and filename is used as the name of the actual file to save.
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const path = p.join(
@@ -30,10 +30,8 @@ const storage = multer.diskStorage({
   },
 });
 
-// Creates a multer instance with the Disk Stroage technique.
 const upload = multer({ storage });
 
-// Takes multiple files as input with "images" as the field name and stores it in the actual destination given above.
 exports.uploadCarImages = upload.array("images[]");
 
 exports.addSellCarRequest = async (req, res, next) => {
@@ -53,7 +51,6 @@ exports.addSellCarRequest = async (req, res, next) => {
       ownershipHistory,
     } = req.body;
 
-    // req.files is set by multer after saving the file
     req.body.images = req.files.map((file) => {
       return `${config.SERVER_DOMAIN}/assets/images/cars/${req.body.vin}/${file.filename}`;
     });
@@ -230,4 +227,59 @@ exports.updateCarListing = catchAsync(async (req, res, next) => {
     status: "success",
     car,
   });
+});
+
+exports.addComment = catchAsync(async (req, res, next) => {
+  const { vin } = req.params;
+  const { text } = req.body;
+  const user = req.user;
+
+  try {
+    const comment = await Comment.create({ text, user: user._id });
+
+    const listing = await Listing.findOneAndUpdate(
+      { vin },
+      { $push: { comments: comment } },
+      { new: true }
+    );
+
+    if (!listing) {
+      return res
+        .status(404)
+        .json({ status: false, message: "Listing not found" });
+    }
+    res.status(201).json({
+      status: "success",
+      comment,
+      listing,
+    });
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    res.status(500).json({ status: false, message: "Internal server error" });
+  }
+});
+
+exports.getComments = catchAsync(async (req, res, next) => {
+  const { vin } = req.params;
+
+  try {
+    const listing = await Listing.findOne({ vin }).populate({
+      path: "comments",
+      populate: {
+        path: "user",
+        select: "firstName lastName",
+      },
+    });
+
+    if (!listing) {
+      return res
+        .status(404)
+        .json({ status: false, message: "Listing not found" });
+    }
+
+    res.status(200).json({ status: "success", comments: listing.comments });
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    res.status(500).json({ status: false, message: "Internal server error" });
+  }
 });
