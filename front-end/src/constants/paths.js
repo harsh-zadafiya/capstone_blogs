@@ -11,6 +11,7 @@ const path = {
   COMPARE_CARS: "/search-blogs",
   UPDATE_PROFILE: "/updateprofile",
   SUBSCRIPTION: "/subscription-plans",
+  CONFIRMATION:"/confirmation-page"
 };
 
 export default path;
