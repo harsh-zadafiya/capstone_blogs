@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const config = require("../config");
 const { listing } = require("../constants/listingConstants");
+const commentSchema = require("./commentModel");
 
 const listingSchema = new mongoose.Schema({
   carCompany: {
@@ -12,15 +13,7 @@ const listingSchema = new mongoose.Schema({
     type: String,
     required: [true, "Car must have a model"],
   },
-  // carMileage: {
-  //     type: Number,
-  //     required: [true, "Mileage is required."],
-  //     min: 0,
-  // },
-  // carEngine: {
-  //     type: String,
-  //     required: [true, "Car must have an engine. Please enter a value."],
-  // },
+
   vin: {
     type: String,
     unique: true,
@@ -45,16 +38,7 @@ const listingSchema = new mongoose.Schema({
     type: String,
     required: [true, "Location can't be empty. Please enter a value."],
   },
-  //   highlight: {
-  //     type: String,
-  //     required: [true, "You must type something about your car"],
-  //     maxLength: 2100,
-  //   },
-  //   recentServiceHistory: {
-  //     type: String,
-  //     required: [true, "Recent Service History is required."],
-  //     maxLength: 2100,
-  //   },
+
   ownershipHistory: {
     type: String,
     required: [true, "Ownership History is required."],
@@ -93,6 +77,7 @@ const listingSchema = new mongoose.Schema({
     ref: "User",
     required: [true, "Listing must be added by a user"],
   },
+  comments: [commentSchema.schema],
 });
 
 module.exports = mongoose.model("Listing", listingSchema);

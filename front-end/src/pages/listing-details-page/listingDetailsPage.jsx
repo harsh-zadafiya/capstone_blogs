@@ -452,7 +452,7 @@ const ListingDetailsPage = () => {
             <DescriptionGroup>
               <DescriptionHeading>Comments</DescriptionHeading>
               <Text>{recentServiceHistory}</Text>
-              <CommentComponent />
+              <CommentComponent vin={vin} />
             </DescriptionGroup>
             {sellerNotes ? (
               <DescriptionGroup>
