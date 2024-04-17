@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-server": "node server/src/app.js",
-    "start-client": "cd front-end && npm start",
+    "start-server": "cd server && npm i && cd .. && node server/src/app.js",
+    "start-client": "cd front-end && npm i && npm start",
     "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
