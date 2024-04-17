@@ -70,7 +70,7 @@ function App() {
             <div className="main-section">
               <Routes>
                 <Route path={path.HOME} exact element={<HomePage />} />
-                <Route path={path.SELL_CAR} element={<SellCarPage />} />
+                <Route path={path.ADD_NEW_BLOG} element={<SellCarPage />} />
                 <Route path={path.SUBSCRIPTION} element={<Subscription />} />
                 <Route
                   path={path.CONFIRMATION}
@@ -115,7 +115,7 @@ function App() {
                   element={<div>MY LISTINGS....</div>}
                 />
                 <Route
-                  path={`${path.SELL_CAR}/:vin`}
+                  path={`${path.ADD_NEW_BLOG}/:vin`}
                   exact
                   element={<EditCarDetailsPage />}
                 />
