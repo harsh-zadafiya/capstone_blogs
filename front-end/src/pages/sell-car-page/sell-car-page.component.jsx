@@ -153,7 +153,7 @@ const SellCarPage = ({ initialCarData = {}, action = "add" }) => {
         </div>
         {action === "add" ? (
           <div name="tabThree">
-            <h1>Upload Car Images</h1>
+            <h1>Upload Blog Image</h1>
             <StepThree
               switchTab={handleTabSwitch}
               initialData={userData["tabThree"]}
