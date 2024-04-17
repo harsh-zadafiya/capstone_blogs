@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://stirring-puffpuff-37664f.netlify.app//user/checkUser",
+      url: "https://capstone-blogs.onrender.com/user/checkUser",
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
