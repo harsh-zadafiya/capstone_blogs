@@ -21,7 +21,7 @@ function LoginPage() {
 
     try {
       const response = await axios.post(
-        "https://stirring-puffpuff-37664f.netlify.app//user/login",
+        "https://canada4you.netlify.app/user/login",
         {
           email: uname.value,
           password: pass.value,

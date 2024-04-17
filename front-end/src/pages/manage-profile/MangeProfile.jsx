@@ -11,7 +11,7 @@ const ManageProfile = () => {
 
   useEffect(() => {
     axios
-      .get("https://stirring-puffpuff-37664f.netlify.app//user", {
+      .get("https://canada4you.netlify.app/user", {
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },
@@ -30,9 +30,7 @@ const ManageProfile = () => {
 
   const handleBlock = (userId) => {
     axios
-      .post(
-        `https://stirring-puffpuff-37664f.netlify.app//user/${userId}/block`
-      )
+      .post(`https://canada4you.netlify.app/user/${userId}/block`)
       .then(() => {
         // Update the user data to mark the user as blocked
         setAllUser((prevUsers) => {

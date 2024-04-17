@@ -28,7 +28,7 @@ export default function RegistrationPage() {
       try {
         await axios({
           method: "post",
-          url: "https://stirring-puffpuff-37664f.netlify.app//user/signup",
+          url: "https://canada4you.netlify.app/user/signup",
           data: {
             firstName: inputs.fname,
             lastName: inputs.lname,
