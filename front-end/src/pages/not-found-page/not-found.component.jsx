@@ -18,7 +18,7 @@ export default function NotFoundPage() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:8000/user/checkUser",
+      url: "https://stirring-puffpuff-37664f.netlify.app//user/checkUser",
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },

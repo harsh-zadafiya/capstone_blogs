@@ -34,7 +34,7 @@ const ProfilePage = () => {
     try {
       axios({
         method: "post",
-        url: "http://localhost:8000/user/delete",
+        url: "https://stirring-puffpuff-37664f.netlify.app//user/delete",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

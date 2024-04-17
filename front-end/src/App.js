@@ -20,7 +20,7 @@ import {
   UpdateProfilePage,
   NotFoundPage,
   Subscription,
-  ConfirmationPage
+  ConfirmationPage,
 } from "./pages";
 import EditCarDetailsPage from "./pages/EditCarDetails/EditCarDetails.jsx";
 import React, { useEffect } from "react";
@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:8000/user/checkUser",
+      url: "https://stirring-puffpuff-37664f.netlify.app//user/checkUser",
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -72,7 +72,10 @@ function App() {
                 <Route path={path.HOME} exact element={<HomePage />} />
                 <Route path={path.SELL_CAR} element={<SellCarPage />} />
                 <Route path={path.SUBSCRIPTION} element={<Subscription />} />
-                <Route path={path.CONFIRMATION} element={<ConfirmationPage />} />
+                <Route
+                  path={path.CONFIRMATION}
+                  element={<ConfirmationPage />}
+                />
 
                 <Route path={path.NEW_LISTINGS} element={<NewListingsPage />}>
                   <Route
@@ -85,10 +88,10 @@ function App() {
                   />
                 </Route>
                 <Route
-                    path={path.COMPARE_CARS}
-                    exact
-                    element={<ComparePage />}
-                  />
+                  path={path.COMPARE_CARS}
+                  exact
+                  element={<ComparePage />}
+                />
 
                 <Route path={path.PROFILE} exact element={<ProfilePage />} />
                 <Route

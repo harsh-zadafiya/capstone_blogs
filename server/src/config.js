@@ -1,1 +1,1 @@
-exports.SERVER_DOMAIN = "http://localhost:8000/";
+exports.SERVER_DOMAIN = "https://stirring-puffpuff-37664f.netlify.app//";

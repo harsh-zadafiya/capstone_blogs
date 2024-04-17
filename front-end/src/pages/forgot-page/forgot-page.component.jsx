@@ -24,7 +24,7 @@ export default function ForgotPage() {
       try {
         axios({
           method: "post",
-          url: "http://localhost:8000/user/forgotpassword",
+          url: "https://stirring-puffpuff-37664f.netlify.app//user/forgotpassword",
           data: {
             email: inputs.email,
             password: inputs.pass,

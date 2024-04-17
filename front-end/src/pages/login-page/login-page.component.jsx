@@ -20,10 +20,13 @@ function LoginPage() {
     var emailNotFound = true;
 
     try {
-      const response = await axios.post("http://localhost:8000/user/login", {
-        email: uname.value,
-        password: pass.value,
-      });
+      const response = await axios.post(
+        "https://stirring-puffpuff-37664f.netlify.app//user/login",
+        {
+          email: uname.value,
+          password: pass.value,
+        }
+      );
 
       if (response.data.status) {
         const { user, token } = response.data;
