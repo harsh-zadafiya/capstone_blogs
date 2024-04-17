@@ -45,7 +45,14 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-app.use("/listing", listingRouter);
+app.use(
+  "/listing",
+  (req, res, next) => {
+    console.log("came here");
+    next();
+  },
+  listingRouter
+);
 app.use("/user", userRouter);
 // app.use("/user", userRoter);
 app.use("/document", documentRouter);
@@ -57,12 +64,11 @@ app.listen(PORT, () => {
   console.log(`Canada 4 U server is running on port: ${PORT}`);
 });
 
+const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY)
-
-const quantity = 1
-const SUCCESS_URL = "http://localhost:3000/confirmation-page"
-const CANCEL_URL = "http://localhost:3000/subscription-plans"
+const quantity = 1;
+const SUCCESS_URL = "http://localhost:3000/confirmation-page";
+const CANCEL_URL = "http://localhost:3000/subscription-plans";
 app.post("/create-checkout-basic-session", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
@@ -74,9 +80,9 @@ app.post("/create-checkout-basic-session", async (req, res) => {
           quantity: quantity,
         },
       ],
-      mode: 'subscription',
+      mode: "subscription",
     });
-    console.log("session: ", session.id, session.url, session)
+    console.log("session: ", session.id, session.url, session);
 
     // get id, save to user, return url
     const sessionId = session.id;
@@ -84,13 +90,11 @@ app.post("/create-checkout-basic-session", async (req, res) => {
 
     // save session.id to the user in your database
 
-    res.json({ url: session.url })
+    res.json({ url: session.url });
   } catch (e) {
-    res.status(500).json({ error: e.message })
+    res.status(500).json({ error: e.message });
   }
-})
-
-
+});
 
 app.post("/create-checkout-pro-session", async (req, res) => {
   try {
@@ -103,9 +107,9 @@ app.post("/create-checkout-pro-session", async (req, res) => {
           quantity: quantity,
         },
       ],
-      mode: 'subscription',
+      mode: "subscription",
     });
-    console.log("session: ", session.id, session.url, session)
+    console.log("session: ", session.id, session.url, session);
 
     // get id, save to user, return url
     const sessionId = session.id;
@@ -113,13 +117,11 @@ app.post("/create-checkout-pro-session", async (req, res) => {
 
     // save session.id to the user in your database
 
-    res.json({ url: session.url })
+    res.json({ url: session.url });
   } catch (e) {
-    res.status(500).json({ error: e.message })
+    res.status(500).json({ error: e.message });
   }
-})
-
-
+});
 
 app.post("/create-checkout-premium-session", async (req, res) => {
   try {
@@ -132,9 +134,9 @@ app.post("/create-checkout-premium-session", async (req, res) => {
           quantity: quantity,
         },
       ],
-      mode: 'subscription',
+      mode: "subscription",
     });
-    console.log("session: ", session.id, session.url, session)
+    console.log("session: ", session.id, session.url, session);
 
     // get id, save to user, return url
     const sessionId = session.id;
@@ -142,8 +144,8 @@ app.post("/create-checkout-premium-session", async (req, res) => {
 
     // save session.id to the user in your database
 
-    res.json({ url: session.url })
+    res.json({ url: session.url });
   } catch (e) {
-    res.status(500).json({ error: e.message })
+    res.status(500).json({ error: e.message });
   }
-})
+});

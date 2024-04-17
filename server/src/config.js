@@ -1,1 +1,1 @@
-exports.SERVER_DOMAIN = "https://stirring-puffpuff-37664f.netlify.app//";
+exports.SERVER_DOMAIN = "https://canada4you.netlify.app/";
