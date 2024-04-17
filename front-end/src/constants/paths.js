@@ -1,7 +1,7 @@
 const path = {
   HOME: "/app",
   NEW_LISTINGS: "/listings",
-  SELL_CAR: "/sell-car",
+  ADD_NEW_BLOG: "/add-new-blog",
   PROFILE: "/profile",
   MANAGE_PROFILE: "/manage-profile",
   MY_LISTINGS: "/my-listings",

@@ -1,0 +1,17 @@
+{
+  "name": "capstone_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-server": "cd server && npm i && cd .. && node server/src/app.js",
+    "start-client": "cd front-end && npm i && npm start",
+    "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

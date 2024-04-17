@@ -331,7 +331,7 @@ const ListingDetailsPage = () => {
                   <ToolTip hoverText="Edit">
                     <EditIcon
                       onClick={() => {
-                        navigate(`${path.SELL_CAR}/${carVIN}`);
+                        navigate(`${path.ADD_NEW_BLOG}/${carVIN}`);
                       }}
                     />
                   </ToolTip>
