@@ -148,7 +148,7 @@ const Navigation = () => {
           </div>
         </div>
         <div className="navigation__bottom">
-          <Link to="/sell-car">
+          <Link to="/add-new-blog">
             <Button
               onClick={() => {
                 setIsNavigationOpen(false);
