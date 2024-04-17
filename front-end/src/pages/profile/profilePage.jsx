@@ -34,7 +34,7 @@ const ProfilePage = () => {
     try {
       axios({
         method: "post",
-        url: "https://canada4you.netlify.app/user/delete",
+        url: "https://capstone-blogs.onrender.com/user/delete",
         headers: {
           "x-access-token": localStorage.getItem("token"),
         },

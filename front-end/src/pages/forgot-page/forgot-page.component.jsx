@@ -24,7 +24,7 @@ export default function ForgotPage() {
       try {
         axios({
           method: "post",
-          url: "https://canada4you.netlify.app/user/forgotpassword",
+          url: "https://capstone-blogs.onrender.com/user/forgotpassword",
           data: {
             email: inputs.email,
             password: inputs.pass,

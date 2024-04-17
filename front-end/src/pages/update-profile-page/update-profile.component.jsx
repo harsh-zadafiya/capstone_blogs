@@ -21,7 +21,7 @@ export default function UpdateProfilePage() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://canada4you.netlify.app/user/updateprofile",
+      url: "https://capstone-blogs.onrender.com/user/updateprofile",
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },
@@ -54,7 +54,7 @@ export default function UpdateProfilePage() {
       try {
         axios({
           method: "post",
-          url: "https://canada4you.netlify.app/user/updateprofile",
+          url: "https://capstone-blogs.onrender.com/user/updateprofile",
           headers: {
             "x-access-token": localStorage.getItem("token"),
           },

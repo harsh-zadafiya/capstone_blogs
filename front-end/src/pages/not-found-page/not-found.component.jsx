@@ -18,7 +18,7 @@ export default function NotFoundPage() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://canada4you.netlify.app/user/checkUser",
+      url: "https://capstone-blogs.onrender.com/user/checkUser",
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },

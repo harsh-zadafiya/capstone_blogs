@@ -1,1 +1,1 @@
-exports.SERVER_DOMAIN = "https://canada4you.netlify.app/";
+exports.SERVER_DOMAIN = "https://capstone-blogs.onrender.com/";

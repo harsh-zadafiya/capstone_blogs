@@ -28,7 +28,7 @@ export default function RegistrationPage() {
       try {
         await axios({
           method: "post",
-          url: "https://canada4you.netlify.app/user/signup",
+          url: "https://capstone-blogs.onrender.com/user/signup",
           data: {
             firstName: inputs.fname,
             lastName: inputs.lname,
